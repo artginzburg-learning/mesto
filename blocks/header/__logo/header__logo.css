@@ -1,5 +1,5 @@
 .header__logo {
-  display: block;
+  display: inline-block;
   min-height: 33px;
   min-width: 142px;
 
