@@ -4,6 +4,13 @@
 
   color: #545454;
   text-decoration-line: none;
+
+  transition-property: opacity;
+  transition-duration: .2s;
+}
+
+.footer__copyright:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {

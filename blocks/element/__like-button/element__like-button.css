@@ -12,4 +12,11 @@
   padding: 0;
 
   cursor: pointer;
+
+  transition-property: opacity;
+  transition-duration: .2s;
+}
+
+.element__like-button:hover {
+  opacity: .5;
 }
