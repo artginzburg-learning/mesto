@@ -1,7 +1,14 @@
 .header {
-  min-height: 119px;
+  box-sizing: border-box;
+  min-height: 120px;
   border-bottom: 1px solid #545454;
 
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    min-height: 85px;
+  }
 }
