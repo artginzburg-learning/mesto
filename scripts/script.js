@@ -3,13 +3,14 @@
 let profileElement = document.querySelector('.profile');
 
 let editButton = profileElement.querySelector('.profile__edit-button');
-let closeButton = popupElement.querySelector('.popup__close-button');
 
 let nameElement = profileElement.querySelector('.profile__name');
 let jobElement = profileElement.querySelector('.profile__description');
 
 let popupElement = document.querySelector('.popup');
 const popupElementOpenedString = 'popup_opened';
+
+let closeButton = popupElement.querySelector('.popup__close-button');
 
 let formElement = popupElement.querySelector('.popup__form');
 
