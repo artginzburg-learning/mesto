@@ -1,30 +1,33 @@
 // Variables
 
 let profile = {
-  element: document.querySelector('.profile'),
+  className: '.profile',
 };
+profile.element = document.querySelector(profile.className);
 profile.buttons = {
-  edit: profile.element.querySelector('.profile__edit-button'),
+  edit: profile.element.querySelector(`${profile.className}__edit-button`),
 };
 profile.displays = {
-  name: profile.element.querySelector('.profile__name'),
-  job: profile.element.querySelector('.profile__description'),
+  name: profile.element.querySelector(`${profile.className}__name`),
+  job: profile.element.querySelector(`${profile.className}__description`),
 }
 
 let popup = {
-  element: document.querySelector('.popup'),
-  elementOpenedClassName: 'popup_opened',
+  textName: 'popup',
 };
+popup.className = `.${popup.textName}`;
+popup.element = document.querySelector(popup.className);
+popup.elementOpenedClassName = `${popup.textName}_opened`;
 popup.buttons = {
-  close: popup.element.querySelector('.popup__close-button'),
+  close: popup.element.querySelector(`${popup.className}__close-button`),
 };
 
 popup.form = {
-  element: popup.element.querySelector('.popup__form'),
+  element: popup.element.querySelector(`${popup.className}__form`),
 };
 popup.form.inputs = {
-  name: popup.form.element.querySelector('.popup__input[name="name"]'),
-  job: popup.form.element.querySelector('.popup__input[name="job"]'),
+  name: popup.form.element.querySelector(`${popup.className}__input[name="name"]`),
+  job: popup.form.element.querySelector(`${popup.className}__input[name="job"]`),
 };
 
 // Functions
