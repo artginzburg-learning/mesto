@@ -3,6 +3,7 @@
   min-width: 24px;
 
   border: none;
+  outline: none;
 
   background-color: transparent;
   background-image: url(../../../images/like-icon.svg);
