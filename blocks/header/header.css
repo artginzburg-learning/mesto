@@ -15,10 +15,13 @@
 
   border-bottom: 1px solid #545454;
   box-sizing: border-box;
-  
+
   top: 0;
-  left: 0;
-  width: 100vw;
+  left: calc((100vw - 880px) / 2);
+
+  width: 880px;
+  max-width: 100vw;
+
   min-height: 120px;
 }
 
@@ -29,5 +32,11 @@
 
   .header::after {
     min-height: 85px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .header::after {
+    left: 0;
   }
 }
