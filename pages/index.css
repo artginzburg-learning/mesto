@@ -1,10 +1,9 @@
 @import url(../vendor/normalize.css);
-@import url(../fonts/Inter/inter.css);
+@import url(../vendor/fonts.css);
 
 @import url(../blocks/page/page.css);
 
 @import url(../blocks/header/header.css);
-/* QUESTION: Убрал отступы, без них как-то безструктурно выходит. Позволяет ли методология BEM положить импорт элементов в файл блока, чтобы здесь подключать только сами блоки, и стоит ли так делать? */
 @import url(../blocks/header/__logo/header__logo.css);
 
 @import url(../blocks/content/content.css);
