@@ -11,6 +11,8 @@
 .header::after {
   position: absolute;
 
+  z-index: -1;
+
   content: '';
 
   border-bottom: 1px solid #545454;
