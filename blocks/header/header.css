@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.header::after {
+.header::before {
   position: absolute;
 
   z-index: -1;
@@ -32,13 +32,13 @@
     min-height: 85px;
   }
 
-  .header::after {
+  .header::before {
     min-height: 85px;
   }
 }
 
 @media screen and (max-width: 880px) {
-  .header::after {
+  .header::before {
     left: 0;
   }
 }
