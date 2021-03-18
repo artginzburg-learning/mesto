@@ -24,13 +24,13 @@ function popupToggle() {
 }
 
 function popupOpen() {
-  popupToggle();
-
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
+
+  popupToggle();
 }
 
-let formSubmitHandler = e => {
+function formSubmitHandler(e) {
   e.preventDefault();
 
   nameElement.textContent = nameInput.value;
