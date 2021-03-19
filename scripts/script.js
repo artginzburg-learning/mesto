@@ -1,3 +1,52 @@
+// # Project 5
+
+const initialCards = [
+  {
+    name: 'Замогилье (деревня)',
+    link: './images/element-zamogilye.jpg',
+  },
+  {
+    name: 'Путино',
+    link: './images/element-putino.jpg',
+  },
+  {
+    name: 'Гора Синай',
+    link: './images/element-sinai.jpg',
+  },
+  {
+    name: 'Куршская коса',
+    link: './images/element-kosa.jpg',
+  },
+  {
+    name: 'Кольский',
+    link: './images/element-kolsky.jpg',
+  },
+  {
+    name: 'Алтай',
+    link: './images/element-altai.jpg',
+  },
+];
+
+const elementTemplate = document.querySelector('#element-template').content;
+const elementsContainer = document.querySelector('.elements__list');
+
+function addCard(name, link) {
+  const card = elementTemplate.querySelector('.element').cloneNode(1);
+
+  const img = card.querySelector('.element__image');
+  img.src = link;
+  img.alt = name;
+
+  const title = card.querySelector('.element__title');
+  title.textContent = name;
+
+  elementsContainer.append(card);
+}
+
+initialCards.forEach(card => addCard(card.name, card.link));
+
+// # Project 4
+
 // Variables
 
 let profileElement = document.querySelector('.profile');
