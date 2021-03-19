@@ -45,6 +45,15 @@ function addCard(name, link) {
 
 initialCards.forEach(card => addCard(card.name, card.link));
 
+
+const likeButton = document.querySelectorAll('.element__like-button');
+
+function toggleLike(e) {
+  e.target.classList.toggle('element__like-button_active');
+}
+
+likeButton.forEach(button => button.addEventListener('click', toggleLike));
+
 // # Project 4
 
 // Variables
