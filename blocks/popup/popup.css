@@ -14,9 +14,7 @@
   height: calc(720px - 146.72px*2);
 
   align-items: flex-start;
-}
 
-.popup {
   visibility: hidden;
   opacity: 0;
   transition: visibility .3s, opacity .3s linear;
