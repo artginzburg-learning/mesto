@@ -2,11 +2,11 @@
 
 > Интерактивная страница, куда можно <u>будет</u> добавлять фотографии, удалять их и ставить лайки.
 
-<kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/review-final)</kbd>
+Project 4: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-4_final)</kbd>
 
 ## Описание
 
-4-я проектная работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
+3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
 
 ## Технологии
 
