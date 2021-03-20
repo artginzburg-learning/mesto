@@ -49,7 +49,6 @@ function createCard(name, link) {
   title.textContent = name;
 
   const likeButton = card.querySelector('.element__like-button');
-
   likeButton.addEventListener('click', toggleLike);
 
   return card;
@@ -119,43 +118,64 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 // FEAT: Card adding
 
-// Variables
+class Popup {
+  constructor(element, openButton, additionalFormHandler) {
+    this.element = element;
+    this.openButton = openButton;
+    this.additionalFormHandler = additionalFormHandler;
 
-const addButton = profileElement.querySelector('.profile__add-button');
+    this.closeButton = element.querySelector('.popup__close-button');
 
-const popupEl = document.querySelector('#element-editor');
+    this.elementOpenedString = 'popup_opened';
 
-const closeBut = popupEl.querySelector('.popup__close-button');
+    this.form = element.querySelector('.popup__form');
 
-const formEl = popupEl.querySelector('.popup__form');
+    this.addListeners();
+  }
 
-const titleInput = formEl.querySelector('.popup__input[name="title"]');
-const linkInput = formEl.querySelector('.popup__input[name="link"]');
+  toggle() {
+    this.element.classList.toggle(this.elementOpenedString);
+  }
 
-// Functions
+  addListeners() {
+    this.openButton.addEventListener('click', () => this.toggle());
+    this.closeButton.addEventListener('click', () => this.toggle());
 
-function popupToggle() {
-  popupEl.classList.toggle(popupElementOpenedString);
+    if (this.form) {
+      this.form.addEventListener('submit', e =>
+        this.formSubmitHandler(e)
+      );
+    }
+  }
+
+  formSubmitHandler(e) {
+    e.preventDefault();
+
+    if (this.additionalFormHandler) {
+      this.additionalFormHandler();
+    }
+  
+    this.toggle();
+  }
 }
+const elementEditorPopup = document.querySelector('#element-editor');
+const elementEditorOpenButton = document.querySelector('.profile__add-button');
 
-function popupOpen() {
-  titleInput.value = '';
-  linkInput.value = '';
+const elementEditor = new Popup(
+  elementEditorPopup,
+  elementEditorOpenButton,
+  function() {
+    const titleInput = this.form.querySelector('.popup__input[name="title"]');
+    const linkInput = this.form.querySelector('.popup__input[name="link"]');
 
-  popupToggle();
-}
+    const cardCreated = createCard(
+      titleInput.value,
+      linkInput.value
+    );
 
-function formSubmitHandler(e) {
-  e.preventDefault();
+    titleInput.value = '';
+    linkInput.value = '';
 
-  addCard(createCard(titleInput.value, linkInput.value), 1);
-
-  popupToggle();
-}
-
-// Perform
-
-addButton.addEventListener('click', popupOpen);
-closeBut.addEventListener('click', popupToggle);
-
-formEl.addEventListener('submit', formSubmitHandler); 
+    addCard(cardCreated, 1);
+  }
+);
