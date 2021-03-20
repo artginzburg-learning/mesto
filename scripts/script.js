@@ -1,7 +1,5 @@
 // FEAT: Initial card loading
 
-// Variables
-
 const initialCards = [
   {
     name: 'Замогилье (деревня)',
@@ -29,43 +27,46 @@ const initialCards = [
   },
 ];
 
-const elementTemplate = document.querySelector('#element-template').content;
-const elementsContainer = document.querySelector('.elements__list');
+class Card {
+  constructor(title, imgLink) {
+    this.title = title;
+    this.imgLink = imgLink;
 
-// Functions
+    this.cardCreated = this.create();
+  }
 
-function toggleLike(e) {
-  e.target.classList.toggle('element__like-button_active');
+  elementTemplate = document.querySelector('#element-template').content;elementsContainer = document.querySelector('.elements__list');
+
+  toggleLike(e) {
+    e.target.classList.toggle('element__like-button_active');
+  }
+
+  create() {
+    const card = this.elementTemplate.querySelector('.element').cloneNode(1);
+
+    const imgElement = card.querySelector('.element__image');
+    const titleElement = card.querySelector('.element__title');
+  
+    const likeButton = card.querySelector('.element__like-button');
+  
+    imgElement.src = this.imgLink;
+    imgElement.alt = this.title;
+  
+    titleElement.textContent = this.title;
+  
+    likeButton.addEventListener('click', this.toggleLike);
+  
+    return card;
+  }
+
+  add(toBeginning) {
+    toBeginning ? this.elementsContainer.prepend(this.cardCreated) : this.elementsContainer.append(this.cardCreated);
+  }
 }
-
-function createCard(name, link) {
-  const card = elementTemplate.querySelector('.element').cloneNode(1);
-
-  const img = card.querySelector('.element__image');
-  const title = card.querySelector('.element__title');
-
-  const likeButton = card.querySelector('.element__like-button');
-
-  img.src = link;
-  img.alt = name;
-
-  title.textContent = name;
-
-  likeButton.addEventListener('click', toggleLike);
-
-  return card;
-}
-
-function addCard(card, toBeginning) {
-  toBeginning ? elementsContainer.prepend(card) : elementsContainer.append(card);
-}
-
-// Perform
 
 initialCards.forEach(card => {
-  const cardCreated = createCard(card.name, card.link);
-
-  addCard(cardCreated);
+  const cardInstance = new Card(card.name, card.link);
+  cardInstance.add();
 });
 
 // FEAT: Make popups interactive through a class
@@ -77,14 +78,14 @@ class Popup {
     this.additionalFormHandler = additionalFormHandler;
     this.additionalOpenHandler = additionalOpenHandler;
 
-    this.elementOpenedString = 'popup_opened';
-
     this.closeButton = element.querySelector('.popup__close-button');
 
     this.form = element.querySelector('.popup__form');
 
     this.addListeners();
   }
+
+  elementOpenedString = 'popup_opened';
 
   toggle() {
     this.element.classList.toggle(this.elementOpenedString);
@@ -152,7 +153,7 @@ new Popup(
   elementEditorPopup,
   elementEditorOpenButton,
   function() {
-    const cardCreated = createCard(
+    const cardInstance = new Card(
       titleInput.value,
       linkInput.value
     );
@@ -160,6 +161,6 @@ new Popup(
     titleInput.value = '';
     linkInput.value = '';
 
-    addCard(cardCreated, 1);
+    cardInstance.add(1);
   }
 );
