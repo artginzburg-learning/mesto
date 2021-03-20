@@ -41,10 +41,16 @@ class Card {
     e.target.classList.toggle('element__like-button_active');
   }
 
+  remove(e) {
+    e.target.parentNode.remove();
+  }
+
   create() {
     const card = this.elementTemplate.querySelector('.element').cloneNode(1);
 
     const imgElement = card.querySelector('.element__image');
+    const trashButton = card.querySelector('.element__trash-button');
+
     const titleElement = card.querySelector('.element__title');
   
     const likeButton = card.querySelector('.element__like-button');
@@ -53,7 +59,8 @@ class Card {
     imgElement.alt = this.title;
   
     titleElement.textContent = this.title;
-  
+
+    trashButton.addEventListener('click', this.remove);
     likeButton.addEventListener('click', this.toggleLike);
   
     return card;
