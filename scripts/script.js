@@ -68,63 +68,14 @@ initialCards.forEach(card => {
   addCard(cardCreated);
 });
 
-// FEAT: Profile editing
-
-// Variables
-
-const profileElement = document.querySelector('.profile');
-
-const editButton = profileElement.querySelector('.profile__edit-button');
-
-const nameElement = profileElement.querySelector('.profile__name');
-const jobElement = profileElement.querySelector('.profile__description');
-
-const popupElement = document.querySelector('#profile-editor');
-const popupElementOpenedString = 'popup_opened';
-
-const closeButton = popupElement.querySelector('.popup__close-button');
-
-const formElement = popupElement.querySelector('.popup__form');
-
-const nameInput = formElement.querySelector('.popup__input[name="name"]');
-const jobInput = formElement.querySelector('.popup__input[name="job"]');
-
-// Functions
-
-function popupToggle() {
-  popupElement.classList.toggle(popupElementOpenedString);
-}
-
-function popupOpen() {
-  nameInput.value = nameElement.textContent;
-  jobInput.value = jobElement.textContent;
-
-  popupToggle();
-}
-
-function formSubmitHandler(e) {
-  e.preventDefault();
-
-  nameElement.textContent = nameInput.value;
-  jobElement.textContent = jobInput.value;
-
-  popupToggle();
-}
-
-// Perform
-
-editButton.addEventListener('click', popupOpen);
-closeButton.addEventListener('click', popupToggle);
-
-formElement.addEventListener('submit', formSubmitHandler); 
-
-// FEAT: Card adding
+// FEAT: Make popups interactive through a class
 
 class Popup {
-  constructor(element, openButton, additionalFormHandler) {
+  constructor(element, openButton, additionalFormHandler, additionalOpenHandler) {
     this.element = element;
     this.openButton = openButton;
     this.additionalFormHandler = additionalFormHandler;
+    this.additionalOpenHandler = additionalOpenHandler;
 
     this.elementOpenedString = 'popup_opened';
 
@@ -139,8 +90,14 @@ class Popup {
     this.element.classList.toggle(this.elementOpenedString);
   }
 
+  open() {
+    this.additionalOpenHandler
+      && this.additionalOpenHandler();
+    this.toggle();
+  }
+
   addListeners() {
-    this.openButton.addEventListener('click', () => this.toggle());
+    this.openButton.addEventListener('click', () => this.open());
     this.closeButton.addEventListener('click', () => this.toggle());
 
     this.form
@@ -159,16 +116,42 @@ class Popup {
   }
 }
 
+// FEAT: Profile editing
+
+const profileEditorPopup = document.querySelector('#profile-editor');
+const profileEditorOpenButton = document.querySelector('.profile__edit-button');
+
+const nameElement = document.querySelector('.profile__name');
+const jobElement = document.querySelector('.profile__description');
+
+const nameInput = profileEditorPopup.querySelector('.popup__input[name="name"]');
+const jobInput = profileEditorPopup.querySelector('.popup__input[name="job"]');
+
+new Popup(
+  profileEditorPopup,
+  profileEditorOpenButton,
+  function() {
+    nameElement.textContent = nameInput.value;
+    jobElement.textContent = jobInput.value;
+  },
+  function() {
+    nameInput.value = nameElement.textContent;
+    jobInput.value = jobElement.textContent;
+  }
+);
+
+// FEAT: Card adding
+
 const elementEditorPopup = document.querySelector('#element-editor');
 const elementEditorOpenButton = document.querySelector('.profile__add-button');
 
-const elementEditor = new Popup(
+const titleInput = elementEditorPopup.querySelector('.popup__input[name="title"]');
+const linkInput = elementEditorPopup.querySelector('.popup__input[name="link"]');
+
+new Popup(
   elementEditorPopup,
   elementEditorOpenButton,
   function() {
-    const titleInput = this.form.querySelector('.popup__input[name="title"]');
-    const linkInput = this.form.querySelector('.popup__input[name="link"]');
-
     const cardCreated = createCard(
       titleInput.value,
       linkInput.value
