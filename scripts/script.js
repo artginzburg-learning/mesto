@@ -34,6 +34,10 @@ const elementsContainer = document.querySelector('.elements__list');
 
 // Functions
 
+function toggleLike(e) {
+  e.target.classList.toggle('element__like-button_active');
+}
+
 function createCard(name, link) {
   const card = elementTemplate.querySelector('.element').cloneNode(1);
 
@@ -43,6 +47,10 @@ function createCard(name, link) {
 
   const title = card.querySelector('.element__title');
   title.textContent = name;
+
+  const likeButton = card.querySelector('.element__like-button');
+
+  likeButton.addEventListener('click', toggleLike);
 
   return card;
 }
@@ -55,24 +63,9 @@ function addCard(card, toBeginning) {
 
 initialCards.forEach(card => {
   const cardCreated = createCard(card.name, card.link);
+
   addCard(cardCreated);
 });
-
-// FEAT: Like
-
-// Variables
-
-const likeButtons = document.querySelectorAll('.element__like-button');
-
-// Functions
-
-function toggleLike(e) {
-  e.target.classList.toggle('element__like-button_active');
-}
-
-// Perform
-
-likeButtons.forEach(button => button.addEventListener('click', toggleLike));
 
 // FEAT: Profile editing
 
