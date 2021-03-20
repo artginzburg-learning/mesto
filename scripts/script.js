@@ -42,13 +42,15 @@ function createCard(name, link) {
   const card = elementTemplate.querySelector('.element').cloneNode(1);
 
   const img = card.querySelector('.element__image');
+  const title = card.querySelector('.element__title');
+
+  const likeButton = card.querySelector('.element__like-button');
+
   img.src = link;
   img.alt = name;
 
-  const title = card.querySelector('.element__title');
   title.textContent = name;
 
-  const likeButton = card.querySelector('.element__like-button');
   likeButton.addEventListener('click', toggleLike);
 
   return card;
@@ -124,9 +126,9 @@ class Popup {
     this.openButton = openButton;
     this.additionalFormHandler = additionalFormHandler;
 
-    this.closeButton = element.querySelector('.popup__close-button');
-
     this.elementOpenedString = 'popup_opened';
+
+    this.closeButton = element.querySelector('.popup__close-button');
 
     this.form = element.querySelector('.popup__form');
 
@@ -141,23 +143,22 @@ class Popup {
     this.openButton.addEventListener('click', () => this.toggle());
     this.closeButton.addEventListener('click', () => this.toggle());
 
-    if (this.form) {
-      this.form.addEventListener('submit', e =>
+    this.form
+      && this.form.addEventListener('submit', e =>
         this.formSubmitHandler(e)
       );
-    }
   }
 
   formSubmitHandler(e) {
     e.preventDefault();
 
-    if (this.additionalFormHandler) {
-      this.additionalFormHandler();
-    }
+    this.additionalFormHandler
+      && this.additionalFormHandler();
   
     this.toggle();
   }
 }
+
 const elementEditorPopup = document.querySelector('#element-editor');
 const elementEditorOpenButton = document.querySelector('.profile__add-button');
 
