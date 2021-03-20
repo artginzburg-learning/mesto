@@ -1,4 +1,6 @@
-// # Project 5
+// FEAT: Initial card loading
+
+// Variables
 
 const initialCards = [
   {
@@ -30,7 +32,9 @@ const initialCards = [
 const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__list');
 
-function addCard(name, link) {
+// Functions
+
+function createCard(name, link) {
   const card = elementTemplate.querySelector('.element').cloneNode(1);
 
   const img = card.querySelector('.element__image');
@@ -40,40 +44,56 @@ function addCard(name, link) {
   const title = card.querySelector('.element__title');
   title.textContent = name;
 
-  elementsContainer.append(card);
+  return card;
 }
 
-initialCards.forEach(card => addCard(card.name, card.link));
+function addCard(card, toBeginning) {
+  toBeginning ? elementsContainer.prepend(card) : elementsContainer.append(card);
+}
 
+// Perform
 
-const likeButton = document.querySelectorAll('.element__like-button');
+initialCards.forEach(card => {
+  const cardCreated = createCard(card.name, card.link);
+  addCard(cardCreated);
+});
+
+// FEAT: Like
+
+// Variables
+
+const likeButtons = document.querySelectorAll('.element__like-button');
+
+// Functions
 
 function toggleLike(e) {
   e.target.classList.toggle('element__like-button_active');
 }
 
-likeButton.forEach(button => button.addEventListener('click', toggleLike));
+// Perform
 
-// # Project 4
+likeButtons.forEach(button => button.addEventListener('click', toggleLike));
+
+// FEAT: Profile editing
 
 // Variables
 
-let profileElement = document.querySelector('.profile');
+const profileElement = document.querySelector('.profile');
 
-let editButton = profileElement.querySelector('.profile__edit-button');
+const editButton = profileElement.querySelector('.profile__edit-button');
 
-let nameElement = profileElement.querySelector('.profile__name');
-let jobElement = profileElement.querySelector('.profile__description');
+const nameElement = profileElement.querySelector('.profile__name');
+const jobElement = profileElement.querySelector('.profile__description');
 
-let popupElement = document.querySelector('.popup');
+const popupElement = document.querySelector('.popup');
 const popupElementOpenedString = 'popup_opened';
 
-let closeButton = popupElement.querySelector('.popup__close-button');
+const closeButton = popupElement.querySelector('.popup__close-button');
 
-let formElement = popupElement.querySelector('.popup__form');
+const formElement = popupElement.querySelector('.popup__form');
 
-let nameInput = formElement.querySelector('.popup__input[name="name"]');
-let jobInput = formElement.querySelector('.popup__input[name="job"]');
+const nameInput = formElement.querySelector('.popup__input[name="name"]');
+const jobInput = formElement.querySelector('.popup__input[name="job"]');
 
 // Functions
 
@@ -97,7 +117,7 @@ function formSubmitHandler(e) {
   popupToggle();
 }
 
-// Listeners
+// Perform
 
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupToggle);
