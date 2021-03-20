@@ -85,7 +85,7 @@ const editButton = profileElement.querySelector('.profile__edit-button');
 const nameElement = profileElement.querySelector('.profile__name');
 const jobElement = profileElement.querySelector('.profile__description');
 
-const popupElement = document.querySelector('.popup');
+const popupElement = document.querySelector('#profile-editor');
 const popupElementOpenedString = 'popup_opened';
 
 const closeButton = popupElement.querySelector('.popup__close-button');
@@ -123,3 +123,46 @@ editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupToggle);
 
 formElement.addEventListener('submit', formSubmitHandler); 
+
+// FEAT: Card adding
+
+// Variables
+
+const addButton = profileElement.querySelector('.profile__add-button');
+
+const popupEl = document.querySelector('#element-editor');
+
+const closeBut = popupEl.querySelector('.popup__close-button');
+
+const formEl = popupEl.querySelector('.popup__form');
+
+const titleInput = formEl.querySelector('.popup__input[name="title"]');
+const linkInput = formEl.querySelector('.popup__input[name="link"]');
+
+// Functions
+
+function popupToggle() {
+  popupEl.classList.toggle(popupElementOpenedString);
+}
+
+function popupOpen() {
+  titleInput.value = '';
+  linkInput.value = '';
+
+  popupToggle();
+}
+
+function formSubmitHandler(e) {
+  e.preventDefault();
+
+  addCard(createCard(titleInput.value, linkInput.value), 1);
+
+  popupToggle();
+}
+
+// Perform
+
+addButton.addEventListener('click', popupOpen);
+closeBut.addEventListener('click', popupToggle);
+
+formEl.addEventListener('submit', formSubmitHandler); 

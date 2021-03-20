@@ -38,13 +38,25 @@
       <a target="_blank" href="https://github.com/artginzburg" class="footer__copyright">&copy; 2021 Art Ginzburg</a>
     </footer>
 
-    <section class="popup">
+    <section class="popup" id="profile-editor">
       <button type="reset" class="popup__close-button"></button>
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form">
           <input autofocus type="text" class="popup__input" name="name" placeholder="Имя">
           <input type="text" class="popup__input" name="job" placeholder="О себе">
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup" id="element-editor">
+      <button type="reset" class="popup__close-button"></button>
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form">
+          <input autofocus type="text" class="popup__input" name="title" placeholder="Название">
+          <input type="text" class="popup__input" name="link" placeholder="Ссылка на картинку">
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>
