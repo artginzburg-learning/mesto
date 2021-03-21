@@ -105,14 +105,14 @@ class Popup {
     this.element.classList.toggle(this.elementOpenedString);
   }
 
-  open() {
+  open(e) {
     this.additionalOpenHandler
-      && this.additionalOpenHandler();
+      && this.additionalOpenHandler(e);
     this.toggle();
   }
 
   addListeners() {
-    this.openButton.addEventListener('click', () => this.open());
+    this.openButton.addEventListener('click', e => this.open(e));
     this.closeButton.addEventListener('click', () => this.toggle());
 
     this.form
@@ -176,5 +176,25 @@ new Popup(
     linkInput.value = '';
 
     cardInstance.add(1);
+  }
+);
+
+//  FEAT: Image preview
+
+const imageViewerPopup = document.querySelector('#image-viewer');
+const imageViewerOpenButton = document.querySelector('.element__image');
+
+const popupImage = imageViewerPopup.querySelector('.popup__image');
+const popupCaption = imageViewerPopup.querySelector('.popup__caption')
+
+new Popup(
+  imageViewerPopup,
+  imageViewerOpenButton,
+  null,
+  function(e) {
+    popupImage.src = e.target.src;
+    popupImage.alt = e.target.alt;
+
+    popupCaption.textContent = e.target.alt;
   }
 );
