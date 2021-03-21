@@ -1,90 +1,3 @@
-// FEAT: Initial card loading
-
-const initialCards = [
-  {
-    name: 'Замогилье (деревня)',
-    link: './images/element-zamogilye.jpg',
-  },
-  {
-    name: 'Путино',
-    link: './images/element-putino.jpg',
-  },
-  {
-    name: 'Гора Синай',
-    link: './images/element-sinai.jpg',
-  },
-  {
-    name: 'Куршская коса',
-    link: './images/element-kosa.jpg',
-  },
-  {
-    name: 'Кольский',
-    link: './images/element-kolsky.jpg',
-  },
-  {
-    name: 'Алтай',
-    link: './images/element-altai.jpg',
-  },
-];
-
-class Card {
-  constructor(title, imgLink) {
-    this.title = title;
-    this.imgLink = imgLink;
-
-    this.cardCreated = this.create();
-  }
-
-  elementTemplate = document.querySelector('#element-template').content;elementsContainer = document.querySelector('.elements__list');
-
-  toggleLike(e) {
-    e.target.classList.toggle('element__like-button_active');
-  }
-
-  remove(e) {
-    e.target.parentNode.remove();
-  }
-
-  create() {
-    const card = this.elementTemplate.querySelector('.element').cloneNode(1);
-
-    const imgElement = card.querySelector('.element__image');
-    const trashButton = card.querySelector('.element__trash-button');
-
-    const titleElement = card.querySelector('.element__title');
-  
-    const likeButton = card.querySelector('.element__like-button');
-  
-    imgElement.src = this.imgLink;
-    imgElement.alt = this.title;
-  
-    titleElement.textContent = this.title;
-
-    trashButton.addEventListener('click', this.remove);
-    likeButton.addEventListener('click', this.toggleLike);
-  
-    return card;
-  }
-
-  add(toBeginning) {
-    this.elementsContainer[
-      (
-        toBeginning
-          ? 'pre'
-          : 'ap'
-      )
-      + 'pend'
-    ](this.cardCreated);
-  }
-}
-
-initialCards.forEach(card => {
-  const cardInstance = new Card(card.name, card.link);
-  cardInstance.add();
-});
-
-// FEAT: Make popups interactive through a class
-
 class Popup {
   constructor(element, openButton, additionalFormHandler, additionalOpenHandler) {
     this.element = element;
@@ -108,11 +21,14 @@ class Popup {
   open(e) {
     this.additionalOpenHandler
       && this.additionalOpenHandler(e);
+
     this.toggle();
   }
 
   addListeners() {
-    this.openButton.addEventListener('click', e => this.open(e));
+    this.openButton
+      && this.openButton.addEventListener('click', e => this.open(e));
+
     this.closeButton.addEventListener('click', () => this.toggle());
 
     this.form
@@ -182,14 +98,13 @@ new Popup(
 //  FEAT: Image preview
 
 const imageViewerPopup = document.querySelector('#image-viewer');
-const imageViewerOpenButton = document.querySelector('.element__image');
 
 const popupImage = imageViewerPopup.querySelector('.popup__image');
 const popupCaption = imageViewerPopup.querySelector('.popup__caption')
 
-new Popup(
+const imageViewer = new Popup(
   imageViewerPopup,
-  imageViewerOpenButton,
+  null,
   null,
   function(e) {
     popupImage.src = e.target.src;
@@ -198,3 +113,91 @@ new Popup(
     popupCaption.textContent = e.target.alt;
   }
 );
+
+
+class Card {
+  constructor(title, imgLink) {
+    this.title = title;
+    this.imgLink = imgLink;
+
+    this.cardCreated = this.create();
+  }
+
+  elementTemplate = document.querySelector('#element-template').content;elementsContainer = document.querySelector('.elements__list');
+
+  toggleLike(e) {
+    e.target.classList.toggle('element__like-button_active');
+  }
+
+  remove(e) {
+    e.target.parentNode.remove();
+  }
+
+  create() {
+    const card = this.elementTemplate.querySelector('.element').cloneNode(1);
+
+    const imgElement = card.querySelector('.element__image');
+    const trashButton = card.querySelector('.element__trash-button');
+
+    const titleElement = card.querySelector('.element__title');
+  
+    const likeButton = card.querySelector('.element__like-button');
+  
+    imgElement.src = this.imgLink;
+    imgElement.alt = this.title;
+  
+    titleElement.textContent = this.title;
+
+    imgElement.addEventListener('click', e => imageViewer.open(e));
+
+    trashButton.addEventListener('click', this.remove);
+    likeButton.addEventListener('click', this.toggleLike);
+  
+    return card;
+  }
+
+  add(toBeginning) {
+    this.elementsContainer[
+      (
+        toBeginning
+          ? 'pre'
+          : 'ap'
+      )
+      + 'pend'
+    ](this.cardCreated);
+  }
+}
+
+// FEAT: Initial card loading
+
+const initialCards = [
+  {
+    name: 'Замогилье (деревня)',
+    link: './images/element-zamogilye.jpg',
+  },
+  {
+    name: 'Путино',
+    link: './images/element-putino.jpg',
+  },
+  {
+    name: 'Гора Синай',
+    link: './images/element-sinai.jpg',
+  },
+  {
+    name: 'Куршская коса',
+    link: './images/element-kosa.jpg',
+  },
+  {
+    name: 'Кольский',
+    link: './images/element-kolsky.jpg',
+  },
+  {
+    name: 'Алтай',
+    link: './images/element-altai.jpg',
+  },
+];
+
+initialCards.forEach(card => {
+  const cardInstance = new Card(card.name, card.link);
+  cardInstance.add();
+});
