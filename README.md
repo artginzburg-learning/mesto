@@ -1,6 +1,6 @@
 # [Место](https://artginzburg.github.io/mesto/)
 
-> Интерактивная страница, куда можно <u>будет</u> добавлять фотографии, удалять их и ставить лайки.
+> Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
 Project 4: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-4_final)</kbd>
 
@@ -10,19 +10,27 @@ Project 4: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 ## Технологии
 
-- Именование блоков и элементов, организация файловой структуры в соответствии с методологией Nested BEM
-- Адаптивная вёрстка
-- Анимации CSS
-- Создание сеток через `flex` и `grid`
-- [Оптимизация картинок](https://tinypng.com/), экспортированных из макета
+- File Structure — Nested BEM
+- BEM Methodology
+- Adaptive design
+- CSS transform and transitions
+- JavaScript
+- Git
+- Flexbox & Grid Layout
+- [Image optimization](https://tinypng.com/)
 
 ## Ссылки
 
-- [Макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-- [Чеклист](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
+- [Макет 4](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4)
+
+  [Макет 5](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5)
+
+- [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
+
+  [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html)
 
 ## Планы по доработке
 
 - [ ] Создать недоработки
 - [ ] Написать планы по доработке
-- [ ] Дописать используемые [технологии](#технологии)
+- [x] Дописать используемые [технологии](#технологии)
