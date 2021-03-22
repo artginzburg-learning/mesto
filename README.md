@@ -34,3 +34,14 @@ Project 4: <kbd>[Reviewed and accepted version of the project](https://github.co
 - [ ] Создать недоработки
 - [ ] Написать планы по доработке
 - [x] Дописать используемые [технологии](#технологии)
+
+<br>
+<br>
+
+<p align="center">
+  <a href="https://github.com/artginzburg/russian-travel"><-- Prev.</a>
+  &nbsp;
+  <code><a href="https://github.com/artginzburg/yandex.praktikum-portfolio">Portfolio</a></code>
+  &nbsp;
+  <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+</p>
