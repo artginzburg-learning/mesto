@@ -18,11 +18,29 @@ class Popup {
   }
 }
 
+class Form extends Popup {
+  constructor(popupElement) {
+    super(popupElement);
+
+    this.form = popupElement.querySelector('.popup__form');
+  }
+
+  setSubmitHandler(handler) {
+    this.form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      handler();
+
+      super.toggle();
+    });
+  }
+}
+
 // FEAT: Profile editing
 
 const profileEditorPopup = document.querySelector('#profile-editor');
 
-const profileEditor = new Popup(profileEditorPopup);
+const profileEditor = new Form(profileEditorPopup);
 
 const profileEditorOpenButton = document.querySelector('.profile__edit-button');
 
@@ -39,22 +57,16 @@ profileEditorOpenButton.addEventListener('click', () => {
   profileEditor.toggle();
 });
 
-const profileEditorForm = profileEditorPopup.querySelector('.popup__form');
-
-profileEditorForm.addEventListener('submit', e => {
-  e.preventDefault();
-
+profileEditor.setSubmitHandler(() => {
   nameElement.textContent = nameInput.value;
   jobElement.textContent = jobInput.value;
-
-  profileEditor.toggle();
-})
+});
 
 // FEAT: Card adding
 
 const elementEditorPopup = document.querySelector('#element-editor');
 
-const elementEditor = new Popup(elementEditorPopup);
+const elementEditor = new Form(elementEditorPopup);
 
 const elementEditorOpenButton = document.querySelector('.profile__add-button');
 elementEditorOpenButton.addEventListener('click', () => { elementEditor.toggle() });
@@ -70,22 +82,15 @@ function addCard(card, toBeginning) {
     : elementsContainer.append(card.created);
 }
 
-const elementEditorForm = elementEditorPopup.querySelector('.popup__form');
-
-elementEditorForm.addEventListener('submit', e => {
-  e.preventDefault();
-
+elementEditor.setSubmitHandler(() => {
   const cardInstance = new Card(
     titleInput.value,
     linkInput.value
   );
 
-  titleInput.value = '';
-  linkInput.value = '';
-
   addCard(cardInstance, 1);
 
-  elementEditor.toggle();
+  elementEditor.form.reset();
 });
 
 //  FEAT: Image preview
