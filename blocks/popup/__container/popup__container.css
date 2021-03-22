@@ -1,4 +1,6 @@
 .popup__container {
+  position: relative;
+
   width: 430px;
   max-width: 100%;
 

@@ -10,8 +10,6 @@
   margin: auto;
 
   max-width: calc(100vw - 19px*2);
-  width: calc(1280px - 376.72px*2);
-  height: calc(720px - 146.72px*2);
 
   align-items: flex-start;
 
@@ -32,10 +30,4 @@
   z-index: -1;
 
   background-color: rgba(0, 0, 0, .5);
-}
-
-@media screen and (max-width: 767px) {
-  .popup {
-    height: calc(568px - 72.62px*2);
-  }
 }
