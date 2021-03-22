@@ -79,6 +79,14 @@ const elementEditorOpenButton = document.querySelector('.profile__add-button');
 const titleInput = elementEditorPopup.querySelector('.popup__input[name="title"]');
 const linkInput = elementEditorPopup.querySelector('.popup__input[name="link"]');
 
+const elementsContainer = document.querySelector('.elements__list');
+
+function addCard(card, toBeginning) {
+  toBeginning
+    ? elementsContainer.prepend(card.created)
+    : elementsContainer.append(card.created);
+}
+
 new Popup(
   elementEditorPopup,
   elementEditorOpenButton,
@@ -91,7 +99,7 @@ new Popup(
     titleInput.value = '';
     linkInput.value = '';
 
-    cardInstance.add(1);
+    addCard(cardInstance, 1);
   }
 );
 
@@ -120,10 +128,10 @@ class Card {
     this.title = title;
     this.imgLink = imgLink;
 
-    this.cardCreated = this.create();
+    this.created = this.create();
   }
 
-  elementTemplate = document.querySelector('#element-template').content;elementsContainer = document.querySelector('.elements__list');
+  elementTemplate = document.querySelector('#element-template').content;
 
   toggleLike(e) {
     e.target.classList.toggle('element__like-button_active');
@@ -134,7 +142,7 @@ class Card {
   }
 
   create() {
-    const card = this.elementTemplate.querySelector('.element').cloneNode(1);
+    const card = this.elementTemplate.firstElementChild.cloneNode(1);
 
     const imgElement = card.querySelector('.element__image');
     const trashButton = card.querySelector('.element__trash-button');
@@ -154,12 +162,6 @@ class Card {
     likeButton.addEventListener('click', this.toggleLike);
   
     return card;
-  }
-
-  add(toBeginning) {
-    toBeginning
-      ? this.elementsContainer.prepend(this.cardCreated)
-      : this.elementsContainer.append(this.cardCreated);
   }
 }
 
@@ -194,5 +196,5 @@ const initialCards = [
 
 initialCards.forEach(card => {
   const cardInstance = new Card(card.name, card.link);
-  cardInstance.add();
+  addCard(cardInstance);
 });
