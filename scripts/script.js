@@ -157,14 +157,9 @@ class Card {
   }
 
   add(toBeginning) {
-    this.elementsContainer[
-      (
-        toBeginning
-          ? 'pre'
-          : 'ap'
-      )
-      + 'pend'
-    ](this.cardCreated);
+    toBeginning
+      ? this.elementsContainer.prepend(this.cardCreated)
+      : this.elementsContainer.append(this.cardCreated);
   }
 }
 
