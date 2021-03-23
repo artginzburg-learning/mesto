@@ -35,6 +35,7 @@ Project 5: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 - [ ] Создать недоработки
 - [ ] Написать планы по доработке
+- [ ] Закрывать поп-апы по нажатию на Esc
 - [x] Дописать используемые [технологии](#технологии)
 
 <br>
