@@ -4,6 +4,8 @@
 
 Project 4: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-4_final)</kbd>
 
+Project 5: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-5_review-2-final)</kbd>
+
 ## Описание
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
