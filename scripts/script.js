@@ -11,6 +11,16 @@ class Popup {
 
   toggle() {
     this.element.classList.toggle(this.elementOpenedString);
+
+    document.onkeypress =
+      document.onkeypress
+        ? undefined
+        : (e => this.keydownHandler(e));
+  }
+
+  keydownHandler(e) {
+    (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
+      && this.toggle();
   }
 
   addListeners() {
