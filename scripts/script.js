@@ -92,7 +92,6 @@ const titleInput = elementEditorPopup.querySelector('.popup__input[name="title"]
 const linkInput = elementEditorPopup.querySelector('.popup__input[name="link"]');
 
 const elementsContainer = document.querySelector('.elements__list');
-
 function addCard(card, toBeginning) {
   toBeginning
     ? elementsContainer.prepend(card.created)
@@ -145,26 +144,40 @@ class Card {
     e.target.parentNode.remove();
   }
 
+  buildImage(element) {
+    element.src = this.imgLink;
+    element.alt = this.title;
+
+    element.addEventListener('click', openPreview);
+  }
+
+  buildTrashButton(element) {
+    element.addEventListener('click', this.remove);
+  }
+
+  buildTitle(element) {
+    element.textContent = this.title;
+  }
+
+  buildLikeButton(element) {
+    element.addEventListener('click', this.toggleLike);
+  }
+
   create() {
     const card = this.elementTemplate.firstElementChild.cloneNode(1);
 
     const imgElement = card.querySelector('.element__image');
+    this.buildImage(imgElement);
+
     const trashButton = card.querySelector('.element__trash-button');
+    this.buildTrashButton(trashButton);
 
     const titleElement = card.querySelector('.element__title');
+    this.buildTitle(titleElement);
   
     const likeButton = card.querySelector('.element__like-button');
-  
-    imgElement.src = this.imgLink;
-    imgElement.alt = this.title;
-  
-    titleElement.textContent = this.title;
+    this.buildLikeButton(likeButton);
 
-    imgElement.addEventListener('click', openPreview);
-
-    trashButton.addEventListener('click', this.remove);
-    likeButton.addEventListener('click', this.toggleLike);
-  
     return card;
   }
 }
@@ -199,6 +212,9 @@ const initialCards = [
 ];
 
 initialCards.forEach(card => {
-  const cardInstance = new Card(card.name, card.link);
+  const cardInstance = new Card(
+    card.name,
+    card.link
+  );
   addCard(cardInstance);
 });
