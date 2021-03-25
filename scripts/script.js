@@ -2,37 +2,44 @@ class Popup {
   constructor(element) {
     this.element = element;
 
-    this.closeButton = element.querySelector('.popup__close-button');
+    this.closeButton = this.element.querySelector('.popup__close-button');
 
-    this.addListeners();
+    this.toggle = () => {
+      this.element.classList.contains(this.elementOpenedString)
+        ? this.removeListeners()
+        : this.setListeners();
+
+      this.element.classList.toggle(this.elementOpenedString);
+    };
+
+    this.keydownHandler = e =>
+      (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
+        && this.toggle();
+    ;
   }
+
+  toggle() { this.toggle() } // necessary for super.toggle() to work
 
   elementOpenedString = 'popup_opened';
 
-  toggle() {
-    this.element.classList.toggle(this.elementOpenedString);
+  setListeners() {
+    this.closeButton.addEventListener('click', this.toggle);
 
-    document.onkeypress =
-      document.onkeypress
-        ? undefined
-        : (e => this.keydownHandler(e));
+    document.addEventListener('keypress', this.keydownHandler);
   }
 
-  keydownHandler(e) {
-    (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
-      && this.toggle();
-  }
+  removeListeners() {
+    this.closeButton.removeEventListener('click', this.toggle);
 
-  addListeners() {
-    this.closeButton.addEventListener('click', () => this.toggle());
+    document.removeEventListener('keypress', this.keydownHandler);
   }
 }
 
 class Form extends Popup {
-  constructor(popupElement) {
-    super(popupElement);
+  constructor(element) {
+    super(element);
 
-    this.form = popupElement.querySelector('.popup__form');
+    this.form = this.element.querySelector('.popup__form');
   }
 
   setSubmitHandler(handler) {
