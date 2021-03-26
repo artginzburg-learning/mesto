@@ -48,6 +48,8 @@ class Form extends Popup {
         && this.submitHandler();
   
       super.toggle();
+
+      document.activeElement.blur();
     }
   }
 
