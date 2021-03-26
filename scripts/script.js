@@ -28,7 +28,6 @@ class Popup {
 
     document.addEventListener('keypress', this.keydownHandler);
   }
-
   removeListeners() {
     this.closeButton.removeEventListener('click', this.toggle);
 
@@ -59,7 +58,6 @@ class Form extends Popup {
     
     this.form.addEventListener('submit', this.fullSubmitHandler);
   }
-
   removeListeners() {
     super.removeListeners();
 
@@ -70,17 +68,15 @@ class Form extends Popup {
 // FEAT: Profile editing
 
 const profileEditorPopup = document.querySelector('#profile-editor');
-
 const profileEditor = new Form(profileEditorPopup);
 
-const profileEditorOpenButton = document.querySelector('.profile__edit-button');
+const nameInput = profileEditor.form.elements.name;
+const jobInput = profileEditor.form.elements.job;
 
 const nameElement = document.querySelector('.profile__name');
 const jobElement = document.querySelector('.profile__description');
 
-const nameInput = profileEditorPopup.querySelector('.popup__input[name="name"]');
-const jobInput = profileEditorPopup.querySelector('.popup__input[name="job"]');
-
+const profileEditorOpenButton = document.querySelector('.profile__edit-button');
 profileEditorOpenButton.addEventListener('click', () => {
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
@@ -96,14 +92,13 @@ profileEditor.submitHandler = () => {
 // FEAT: Card adding
 
 const elementEditorPopup = document.querySelector('#element-editor');
-
 const elementEditor = new Form(elementEditorPopup);
 
-const elementEditorOpenButton = document.querySelector('.profile__add-button');
-elementEditorOpenButton.addEventListener('click', () => { elementEditor.toggle() });
+const titleInput = elementEditor.form.elements.title;
+const linkInput = elementEditor.form.elements.link;
 
-const titleInput = elementEditorPopup.querySelector('.popup__input[name="title"]');
-const linkInput = elementEditorPopup.querySelector('.popup__input[name="link"]');
+const elementEditorOpenButton = document.querySelector('.profile__add-button');
+elementEditorOpenButton.addEventListener('click', elementEditor.toggle);
 
 const elementsContainer = document.querySelector('.elements__list');
 function addCard(card, toBeginning) {
