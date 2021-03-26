@@ -40,16 +40,27 @@ class Form extends Popup {
     super(element);
 
     this.form = this.element.querySelector('.popup__form');
+
+    this.fullSubmitHandler = e => {
+      e.preventDefault();
+  
+      this.submitHandler
+        && this.submitHandler();
+  
+      super.toggle();
+    }
   }
 
-  setSubmitHandler(handler) {
-    this.form.addEventListener('submit', e => {
-      e.preventDefault();
+  setListeners() {
+    super.setListeners();
+    
+    this.form.addEventListener('submit', this.fullSubmitHandler);
+  }
 
-      handler();
+  removeListeners() {
+    super.removeListeners();
 
-      super.toggle();
-    });
+    this.form.removeEventListener('submit', this.fullSubmitHandler);
   }
 }
 
@@ -74,10 +85,10 @@ profileEditorOpenButton.addEventListener('click', () => {
   profileEditor.toggle();
 });
 
-profileEditor.setSubmitHandler(() => {
+profileEditor.submitHandler = () => {
   nameElement.textContent = nameInput.value;
   jobElement.textContent = jobInput.value;
-});
+};
 
 // FEAT: Card adding
 
@@ -98,7 +109,7 @@ function addCard(card, toBeginning) {
     : elementsContainer.append(card.created);
 }
 
-elementEditor.setSubmitHandler(() => {
+elementEditor.submitHandler = () => {
   const cardInstance = new Card(
     titleInput.value,
     linkInput.value
@@ -107,7 +118,7 @@ elementEditor.setSubmitHandler(() => {
   addCard(cardInstance, 1);
 
   elementEditor.form.reset();
-});
+};
 
 //  FEAT: Image preview
 
