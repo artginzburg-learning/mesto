@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> <!-- 'maximum-scale' fixes auto-zooming on some mobile devices -->
     <title lang="en">Mesto · Russia</title>
     <link rel="stylesheet" href="./pages/index.css">
 
@@ -85,6 +85,6 @@
       </li>
     </template>
 
-    <script src="./scripts/script.js"></script>
+    <script src="./scripts/script.js"></script> <!-- script import is before body end since `defer` attr may be unsupported -->
   </body>
 </html>

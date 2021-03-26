@@ -4,6 +4,7 @@ class Popup {
 
     this.closeButton = this.element.querySelector('.popup__close-button');
 
+    // the methods below are set through constructor() because otherwise `this` called inside of a callback function points to `event.target`, and `.bind(this)` is bad for memory 'cause it creates a new function on every call
     this.toggle = () => {
       this.element.classList.contains(this.elementOpenedString)
         ? this.removeListeners()
@@ -18,7 +19,7 @@ class Popup {
     ;
   }
 
-  toggle() { this.toggle() } // necessary for super.toggle() to work
+  toggle() { this.toggle() } // necessary for `super.toggle()` to work since it's explicitly set through constructor()
 
   elementOpenedString = 'popup_opened';
 
@@ -49,7 +50,7 @@ class Form extends Popup {
   
       super.toggle();
 
-      document.activeElement.blur();
+      document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
     }
   }
 
