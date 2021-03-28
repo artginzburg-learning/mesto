@@ -13,7 +13,11 @@ class Popup {
       this.element.classList.toggle(this.elementOpenedString);
     };
 
-    this.keydownHandler = e =>
+    this.clickHandler = e =>
+      (e.target === e.currentTarget || e.target === this.closeButton)
+        && this.toggle();
+
+    this.keypressHandler = e =>
       (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
         && this.toggle();
     ;
@@ -24,14 +28,14 @@ class Popup {
   elementOpenedString = 'popup_opened';
 
   setListeners() {
-    this.closeButton.addEventListener('click', this.toggle);
+    this.element.addEventListener('click', this.clickHandler);
 
-    document.addEventListener('keypress', this.keydownHandler);
+    document.addEventListener('keypress', this.keypressHandler);
   }
   removeListeners() {
-    this.closeButton.removeEventListener('click', this.toggle);
+    this.element.removeEventListener('click', this.clickHandler);
 
-    document.removeEventListener('keypress', this.keydownHandler);
+    document.removeEventListener('keypress', this.keypressHandler);
   }
 }
 
