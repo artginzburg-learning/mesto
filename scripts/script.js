@@ -112,10 +112,10 @@ function addCard(card, toBeginning) {
 }
 
 elementEditor.submitHandler = () => {
-  const cardInstance = new Card(
-    titleInput.value,
-    linkInput.value
-  );
+  const cardInstance = new Card({
+    name: titleInput.value,
+    link: linkInput.value,
+  });
 
   addCard(cardInstance, 1);
 
@@ -140,9 +140,9 @@ function openPreview(e) {
 }
 
 class Card {
-  constructor(title, imgLink) {
-    this.title = title;
-    this.imgLink = imgLink;
+  constructor(cardData) {
+    this.name = cardData.name;
+    this.link = cardData.link;
 
     this.created = this.create();
   }
@@ -158,8 +158,8 @@ class Card {
   }
 
   buildImage(element) {
-    element.src = this.imgLink;
-    element.alt = this.title;
+    element.src = this.link;
+    element.alt = this.name;
 
     element.addEventListener('click', openPreview);
   }
@@ -169,7 +169,7 @@ class Card {
   }
 
   buildTitle(element) {
-    element.textContent = this.title;
+    element.textContent = this.name;
   }
 
   buildLikeButton(element) {
@@ -225,9 +225,9 @@ const initialCards = [
 ];
 
 initialCards.forEach(card => {
-  const cardInstance = new Card(
-    card.name,
-    card.link
-  );
+  const cardInstance = new Card({
+    name: card.name,
+    link: card.link,
+  });
   addCard(cardInstance);
 });
