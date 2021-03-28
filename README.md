@@ -6,6 +6,8 @@ Project 4: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 Project 5: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-5_review-2-final)</kbd>
 
+Project 6: <kbd>Currently in development...</kbd>
+
 ## Описание
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
@@ -27,16 +29,22 @@ Project 5: <kbd>[Reviewed and accepted version of the project](https://github.co
 
   [Макет 5](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5)
 
+  [Макет 6](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6)
+
 - [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
 
   [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html)
+
+  [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html)
 
 ## Планы по доработке
 
 - [ ] Создать недоработки
 - [ ] Написать планы по доработке
-- [ ] Закрывать поп-апы по нажатию на Esc
 - [ ] Делегировать события
+- [ ] Валидация форм (Включение валидации вызовом enableValidation, настройки передавать аргументом в виде объекта) в отдельном файле validate.js
+- [ ] Закрывать поп-апы по клику на оверлей
+- [x] Закрывать поп-апы по нажатию на Esc
 - [x] Дописать используемые [технологии](#технологии)
 
 <br>
