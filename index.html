@@ -47,8 +47,8 @@
         <button type="reset" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" action> <!-- 'action' attr is necessary for iOS to display blue 'Go' button on the keyboard -->
-          <input type="text" autocomplete="name" autocapitalize="words" class="popup__input" name="name" placeholder="Имя">
-          <input type="text" class="popup__input" name="job" placeholder="О себе">
+          <input type="text" autocomplete="name" autocapitalize="words" class="popup__input" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
+          <input type="text" class="popup__input" name="job" placeholder="О себе" minlength="2" maxlength="200" required>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>
@@ -59,8 +59,8 @@
         <button type="button" class="popup__close-button"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" action>
-          <input type="text" class="popup__input" name="title" placeholder="Название">
-          <input type="url" class="popup__input" name="link" placeholder="Ссылка на картинку">
+          <input type="text" class="popup__input" name="title" placeholder="Название" minlength="2" maxlength="30" required>
+          <input type="url" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
           <button type="submit" class="popup__button">Создать</button>
         </form>
       </div>
