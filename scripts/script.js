@@ -6,11 +6,11 @@ class Popup {
 
     // the methods below are set through constructor() because otherwise `this` called inside of a callback function points to `event.target`, and `.bind(this)` is bad for memory 'cause it creates a new function on every call
     this.toggle = () => {
-      this.element.classList.contains(this.elementOpenedString)
+      this.element.classList.contains(this.elementOpenedClass)
         ? this.removeListeners()
         : this.setListeners();
 
-      this.element.classList.toggle(this.elementOpenedString);
+      this.element.classList.toggle(this.elementOpenedClass);
     };
 
     this.clickHandler = e =>
@@ -25,7 +25,7 @@ class Popup {
 
   toggle() { this.toggle() } // necessary for `super.toggle()` to work since it's explicitly set through constructor()
 
-  elementOpenedString = 'popup_opened';
+  elementOpenedClass = 'popup_opened';
 
   setListeners() {
     this.element.addEventListener('click', this.clickHandler);

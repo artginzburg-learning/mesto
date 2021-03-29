@@ -10,9 +10,6 @@
   font-size: 14px;
   line-height: 17px;
 
-  margin-top: 17px;
-}
-
-.popup__input:first-of-type {
-  margin-top: 0;
+  transition-property: border-bottom;
+  transition-duration: .3s;
 }
