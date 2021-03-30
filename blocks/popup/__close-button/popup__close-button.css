@@ -1,6 +1,6 @@
 .popup__close-button {
-  min-height: 40px;
-  min-width: 40px;
+  min-height: 41px;
+  min-width: 41px;
 
   border: none;
   outline: none;
@@ -21,8 +21,8 @@
   transition-property: opacity;
   transition-duration: .2s;
 
-  top: -42px;
-  right: -42px;
+  top: -38px;
+  right: -38px;
 }
 
 .popup__close-button:hover {
@@ -34,7 +34,7 @@
     min-height: 26px;
     min-width: 26px;
 
-    top: calc(-26px - 13px);
+    top: -45px;
     right: 6px;
   }
 }
