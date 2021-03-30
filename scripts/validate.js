@@ -13,6 +13,11 @@ const validation = {
     errorElement.textContent = '';
   },
 
+  disableFormButton: (data, formElement) => {
+    const buttonElement = formElement.querySelector(data.submitButtonSelector);
+    buttonElement.disabled = 1;
+  },
+
   resetFormErrors: (data, formElement) => {
     const inputList = Array.from(
       formElement.querySelectorAll(data.inputSelector)
@@ -20,6 +25,7 @@ const validation = {
     inputList.forEach(inputElement =>
       validation.hideInputError(data, formElement, inputElement)
     );
+    validation.disableFormButton(data, formElement);
   },
 
   checkInputValidity: (data, formElement, inputElement) =>
@@ -50,11 +56,6 @@ const validation = {
     inputList.forEach(inputElement =>
       inputElement.addEventListener('input', () => validation.validationHandler(data, formElement, inputElement, inputList, buttonElement))
     );
-  },
-
-  disableFormButton: (data, formElement) => {
-    const buttonElement = formElement.querySelector(data.submitButtonSelector);
-    buttonElement.disabled = 1;
   },
 
   enableValidation: data => {
