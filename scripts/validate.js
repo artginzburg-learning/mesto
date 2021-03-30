@@ -22,6 +22,12 @@ const hasInvalidInput = inputList => inputList.some(inputElement => !inputElemen
 const toggleButtonState = (data, inputList, buttonElement) =>
   buttonElement.disabled = hasInvalidInput(inputList);
 
+const validationHandler = (data, formElement, inputElement, inputList, buttonElement) => {
+  checkInputValidity(data, formElement, inputElement);
+
+  toggleButtonState(data, inputList, buttonElement);
+};
+
 const setEventListeners = (data, formElement) => {
   const inputList = Array.from(
     formElement.querySelectorAll(data.inputSelector)
@@ -32,11 +38,7 @@ const setEventListeners = (data, formElement) => {
   toggleButtonState(data, inputList, buttonElement);
 
   inputList.forEach(inputElement =>
-    inputElement.addEventListener('input', function() {
-      checkInputValidity(data, formElement, inputElement);
-
-      toggleButtonState(data, inputList, buttonElement);
-    })
+    inputElement.addEventListener('input', () => validationHandler(data, formElement, inputElement, inputList, buttonElement))
   );
 };
 

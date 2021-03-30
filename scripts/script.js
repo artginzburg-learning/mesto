@@ -225,9 +225,6 @@ const initialCards = [
 ];
 
 initialCards.forEach(card => {
-  const cardInstance = new Card({
-    name: card.name,
-    link: card.link,
-  });
+  const cardInstance = new Card(card);
   addCard(cardInstance);
 });
