@@ -40,10 +40,8 @@ const elementEditorOpenButton = document.querySelector('.profile__add-button');
 elementEditorOpenButton.addEventListener('click', elementEditor.toggle);
 
 const elementsContainer = document.querySelector('.elements__list');
-function addCard(card, toBeginning) {
-  toBeginning
-    ? elementsContainer.prepend(card.created)
-    : elementsContainer.append(card.created);
+function addCard(card) {
+  elementsContainer.prepend(card.created);
 }
 
 elementEditor.submitHandler = () => {
@@ -52,7 +50,7 @@ elementEditor.submitHandler = () => {
     link: linkInput.value,
   });
 
-  addCard(cardInstance, 1);
+  addCard(cardInstance);
 
   elementEditor.form.reset();
 };
@@ -77,29 +75,29 @@ function openPreview(data) {
 
 const initialCards = [
   {
-    name: 'Замогилье (деревня)',
-    link: './images/element-zamogilye.jpg',
+    name: "Алтай",
+    link: "./images/element-altai.jpg"
   },
   {
-    name: 'Путино',
-    link: './images/element-putino.jpg',
+    name: "Кольский",
+    link: "./images/element-kolsky.jpg"
   },
   {
-    name: 'Гора Синай',
-    link: './images/element-sinai.jpg',
+    name: "Куршская коса",
+    link: "./images/element-kosa.jpg"
   },
   {
-    name: 'Куршская коса',
-    link: './images/element-kosa.jpg',
+    name: "Гора Синай",
+    link: "./images/element-sinai.jpg"
   },
   {
-    name: 'Кольский',
-    link: './images/element-kolsky.jpg',
+    name: "Путино",
+    link: "./images/element-putino.jpg"
   },
   {
-    name: 'Алтай',
-    link: './images/element-altai.jpg',
-  },
+    name: "Замогилье (деревня)",
+    link: "./images/element-zamogilye.jpg"
+  }
 ];
 
 initialCards.forEach(card => {

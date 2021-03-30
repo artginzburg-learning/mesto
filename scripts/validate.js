@@ -63,9 +63,13 @@ const validation = {
     );
     formList.forEach(formElement => {
       validation.setEventListeners(data, formElement);
-      formElement.addEventListener('reset', () => validation.resetFormErrors(data, formElement));
+
+      formElement.addEventListener('reset', () =>
+        validation.resetFormErrors(data, formElement)
+      );
+
       formElement.addEventListener('submit', () =>
-      validation.disableFormButton(data, formElement)
+        validation.disableFormButton(data, formElement)
       );
     });
   },
