@@ -59,10 +59,10 @@ const imageViewer = new Popup(imageViewerPopup);
 const popupImage = imageViewerPopup.querySelector('.popup__image');
 const popupCaption = imageViewerPopup.querySelector('.popup__caption');
 
-function openPreview(e) {
-  popupImage.src = e.target.src;
+function openPreview(data) {
+  popupImage.src = data.link;
 
-  popupCaption.textContent = e.target.alt;
+  popupCaption.textContent = data.name;
 
   imageViewer.toggle();
 }

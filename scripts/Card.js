@@ -19,7 +19,10 @@ class Card {
   buildImage(element) {
     element.src = this.link;
 
-    element.addEventListener('click', openPreview);
+    element.addEventListener('click', () => openPreview({
+      name: this.name,
+      link: this.link,
+    }));
   }
 
   buildTrashButton(element) {
