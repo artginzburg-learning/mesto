@@ -61,7 +61,6 @@ const popupCaption = imageViewerPopup.querySelector('.popup__caption');
 
 function openPreview(e) {
   popupImage.src = e.target.src;
-  popupImage.alt = e.target.alt;
 
   popupCaption.textContent = e.target.alt;
 
