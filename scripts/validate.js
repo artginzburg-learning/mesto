@@ -13,6 +13,15 @@ const validation = {
     errorElement.textContent = '';
   },
 
+  resetFormErrors: (data, formElement) => {
+    const inputList = Array.from(
+      formElement.querySelectorAll(data.inputSelector)
+    );
+    inputList.forEach(inputElement =>
+      validation.hideInputError(data, formElement, inputElement)
+    );
+  },
+
   checkInputValidity: (data, formElement, inputElement) =>
     inputElement.validity.valid
       ? validation.hideInputError(data, formElement, inputElement)
@@ -43,13 +52,22 @@ const validation = {
     );
   },
 
+  disableFormButton: (data, formElement) => {
+    const buttonElement = formElement.querySelector(data.submitButtonSelector);
+    buttonElement.disabled = 1;
+  },
+
   enableValidation: data => {
     const formList = Array.from(
       document.querySelectorAll(data.formSelector)
     );
-    formList.forEach(formElement =>
-      validation.setEventListeners(data, formElement)
-    );
+    formList.forEach(formElement => {
+      validation.setEventListeners(data, formElement);
+      formElement.addEventListener('reset', () => validation.resetFormErrors(data, formElement));
+      formElement.addEventListener('submit', () =>
+      validation.disableFormButton(data, formElement)
+      );
+    });
   },
 }
 

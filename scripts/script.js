@@ -9,10 +9,16 @@ const jobInput = profileEditor.form.elements.job;
 const nameElement = document.querySelector('.profile__name');
 const jobElement = document.querySelector('.profile__description');
 
-const profileEditorOpenButton = document.querySelector('.profile__edit-button');
-profileEditorOpenButton.addEventListener('click', () => {
+profileEditor.form.addEventListener('reset', e => {
+  e.preventDefault();
+
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
+});
+
+const profileEditorOpenButton = document.querySelector('.profile__edit-button');
+profileEditorOpenButton.addEventListener('click', () => {
+  profileEditor.form.reset();
 
   profileEditor.toggle();
 });
