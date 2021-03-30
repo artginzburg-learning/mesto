@@ -2,7 +2,7 @@
   background-color: #000;
 
   color: #fff;
-  border: none;
+  border: 1px solid #000;
   outline: none;
   border-radius: 2px;
 
@@ -17,8 +17,6 @@
 
   transition-property: opacity background-color color;
   transition-duration: .2s;
-
-  border: 1px solid #000;
 }
 
 .popup__button:hover {
