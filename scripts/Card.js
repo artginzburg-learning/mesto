@@ -18,7 +18,6 @@ class Card {
 
   buildImage(element) {
     element.src = this.link;
-    element.alt = this.name;
 
     element.addEventListener('click', openPreview);
   }
