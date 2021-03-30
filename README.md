@@ -4,9 +4,9 @@
 
 Project 4: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-4_final)</kbd>
 
-Project 5: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-5_review-2-final)</kbd>
+Project 5: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-5_final)</kbd>
 
-Project 6: <kbd>Currently in development...</kbd>
+Project 6: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-6_final)</kbd>
 
 ## Описание
 
