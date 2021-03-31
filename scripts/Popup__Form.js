@@ -10,7 +10,7 @@ class Form extends Popup {
       this.submitHandler
         && this.submitHandler();
   
-      super.toggle();
+      this.toggle();
 
       document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
     }
