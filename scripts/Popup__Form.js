@@ -2,9 +2,9 @@ class Form extends Popup {
   constructor(element) {
     super(element);
 
-    this.form = this.element.querySelector('.popup__form');
+    this.form = this._element.querySelector('.popup__form');
 
-    this.fullSubmitHandler = e => {
+    this._fullSubmitHandler = e => {
       e.preventDefault();
   
       this.submitHandler
@@ -16,14 +16,14 @@ class Form extends Popup {
     }
   }
 
-  setListeners() {
-    super.setListeners();
+  _setListeners() {
+    super._setListeners();
     
-    this.form.addEventListener('submit', this.fullSubmitHandler);
+    this.form.addEventListener('submit', this._fullSubmitHandler);
   }
-  removeListeners() {
-    super.removeListeners();
+  _removeListeners() {
+    super._removeListeners();
 
-    this.form.removeEventListener('submit', this.fullSubmitHandler);
+    this.form.removeEventListener('submit', this._fullSubmitHandler);
   }
 }

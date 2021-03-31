@@ -1,56 +1,56 @@
 class Card {
   constructor(cardData) {
-    this.name = cardData.name;
-    this.link = cardData.link;
+    this._name = cardData.name;
+    this._link = cardData.link;
 
-    this.created = this.create();
+    this.created = this._create();
   }
 
-  elementTemplate = document.querySelector('#element-template').content;
+  _elementTemplate = document.querySelector('#element-template').content;
 
-  toggleLike(e) {
+  _toggleLike(e) {
     e.target.classList.toggle('element__like-button_active');
   }
 
-  remove(e) {
+  _remove(e) {
     e.target.parentNode.remove();
   }
 
-  buildImage(element) {
-    element.src = this.link;
+  _buildImage(element) {
+    element.src = this._link;
 
     element.addEventListener('click', () => openPreview({
-      name: this.name,
-      link: this.link,
+      name: this._name,
+      link: this._link,
     }));
   }
 
-  buildTrashButton(element) {
-    element.addEventListener('click', this.remove);
+  _buildTrashButton(element) {
+    element.addEventListener('click', this._remove);
   }
 
-  buildTitle(element) {
-    element.textContent = this.name;
+  _buildTitle(element) {
+    element.textContent = this._name;
   }
 
-  buildLikeButton(element) {
-    element.addEventListener('click', this.toggleLike);
+  _buildLikeButton(element) {
+    element.addEventListener('click', this._toggleLike);
   }
 
-  create() {
-    const card = this.elementTemplate.firstElementChild.cloneNode(1);
+  _create() {
+    const card = this._elementTemplate.firstElementChild.cloneNode(1);
 
     const imgElement = card.querySelector('.element__image');
-    this.buildImage(imgElement);
+    this._buildImage(imgElement);
 
     const trashButton = card.querySelector('.element__trash-button');
-    this.buildTrashButton(trashButton);
+    this._buildTrashButton(trashButton);
 
     const titleElement = card.querySelector('.element__title');
-    this.buildTitle(titleElement);
+    this._buildTitle(titleElement);
   
     const likeButton = card.querySelector('.element__like-button');
-    this.buildLikeButton(likeButton);
+    this._buildLikeButton(likeButton);
 
     return card;
   }
