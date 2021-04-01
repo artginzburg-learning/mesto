@@ -1,4 +1,6 @@
-class Card {
+import openPreview from "./index.js";
+
+export default class Card {
   constructor(cardData) {
     this._name = cardData.name;
     this._link = cardData.link;

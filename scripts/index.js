@@ -1,3 +1,7 @@
+import Popup from "./Popup.js";
+import Form from "./Popup__Form.js";
+import Card from "./Card.js";
+
 // FEAT: Profile editing
 
 const profileEditorPopup = document.querySelector('#profile-editor');
@@ -63,7 +67,7 @@ const imageViewer = new Popup(imageViewerPopup);
 const popupImage = imageViewerPopup.querySelector('.popup__image');
 const popupCaption = imageViewerPopup.querySelector('.popup__caption');
 
-function openPreview(data) {
+export default function openPreview(data) {
   popupImage.src = data.link;
 
   popupCaption.textContent = data.name;
