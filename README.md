@@ -8,20 +8,23 @@ Project 5: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 Project 6: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-6_final)</kbd>
 
+Project 7: <kbd>Currently in development...</kbd>
+
 ## Описание
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
 
 ## Технологии
 
-- File Structure — Nested BEM
 - BEM Methodology
+- File Structure — Nested BEM
 - Adaptive design
 - CSS transformations and transitions
-- JavaScript
-- Git
 - Flexbox & Grid Layout
+- JavaScript (Classes, Modules)
+- Live form validation
 - [Image optimization](https://tinypng.com/)
+- Version Control: Git
 
 ## Ссылки
 
@@ -31,11 +34,18 @@ Project 6: <kbd>[Reviewed and accepted version of the project](https://github.co
 
   [Макет 6](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6)
 
-- [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
+<details>
+  <summary>Чеклисты</summary>
 
-  [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html)
+  - [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
 
-  [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html)
+    [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html)
+
+    [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html)
+    
+    [Чеклист 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html)
+  
+</details>
 
 ## Планы по доработке
 
