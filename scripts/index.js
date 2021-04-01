@@ -1,11 +1,23 @@
 import Popup from "./Popup.js";
 import Form from "./Popup__Form.js";
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
+const defaultFormConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
 
 // FEAT: Profile editing
 
 const profileEditorPopup = document.querySelector('#profile-editor');
 const profileEditor = new Form(profileEditorPopup);
+
+const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
+profileEditorValidator.enableValidation();
 
 const nameInput = profileEditor.form.elements.name;
 const jobInput = profileEditor.form.elements.job;
@@ -36,6 +48,9 @@ profileEditor.submitHandler = () => {
 
 const elementEditorPopup = document.querySelector('#element-editor');
 const elementEditor = new Form(elementEditorPopup);
+
+const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
+elementEditorValidator.enableValidation();
 
 const titleInput = elementEditor.form.elements.title;
 const linkInput = elementEditor.form.elements.link;

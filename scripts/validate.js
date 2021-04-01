@@ -1,4 +1,4 @@
-const validation = {
+export const validation = {
   showInputError: (data, formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(data.inputErrorClass);
@@ -57,29 +57,4 @@ const validation = {
       inputElement.addEventListener('input', () => validation.validationHandler(data, formElement, inputElement, inputList, buttonElement))
     );
   },
-
-  enableValidation: data => {
-    const formList = Array.from(
-      document.querySelectorAll(data.formSelector)
-    );
-    formList.forEach(formElement => {
-      validation.setEventListeners(data, formElement);
-
-      formElement.addEventListener('reset', () =>
-        validation.resetFormErrors(data, formElement)
-      );
-
-      formElement.addEventListener('submit', () =>
-        validation.disableFormButton(data, formElement)
-      );
-    });
-  },
 }
-
-validation.enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-});
