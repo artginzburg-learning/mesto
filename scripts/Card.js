@@ -1,14 +1,20 @@
 import openPreview from "./index.js";
 
 export default class Card {
-  constructor(cardData) {
+  constructor(cardData, templateSelector) {
     this._name = cardData.name;
     this._link = cardData.link;
 
+    this._templateSelector = templateSelector;
+
+    this._elementTemplate = document.querySelector(this._templateSelector).content;
+    this._handleImageClick = () => openPreview({
+      name: this._name,
+      link: this._link,
+    });
+
     this.created = this._create();
   }
-
-  _elementTemplate = document.querySelector('#element-template').content;
 
   _toggleLike(e) {
     e.target.classList.toggle('element__like-button_active');
@@ -21,10 +27,7 @@ export default class Card {
   _buildImage(element) {
     element.src = this._link;
 
-    element.addEventListener('click', () => openPreview({
-      name: this._name,
-      link: this._link,
-    }));
+    element.addEventListener('click', this._handleImageClick);
   }
 
   _buildTrashButton(element) {

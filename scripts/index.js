@@ -47,14 +47,17 @@ const elementsContainer = document.querySelector('.elements__list');
 function addCard(card) {
   elementsContainer.prepend(card.created);
 }
+function createInsertDefaultCard(data) {
+  const cardInstance = new Card(data, '#element-template');
+
+  addCard(cardInstance);
+}
 
 elementEditor.submitHandler = () => {
-  const cardInstance = new Card({
+  createInsertDefaultCard({
     name: titleInput.value,
     link: linkInput.value,
   });
-
-  addCard(cardInstance);
 
   elementEditor.form.reset();
 };
@@ -104,7 +107,6 @@ const initialCards = [
   }
 ];
 
-initialCards.forEach(card => {
-  const cardInstance = new Card(card);
-  addCard(cardInstance);
-});
+initialCards.forEach(card =>
+  createInsertDefaultCard(card)
+);
