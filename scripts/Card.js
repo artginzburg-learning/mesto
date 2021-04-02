@@ -7,56 +7,72 @@ export default class Card {
 
     this._templateSelector = templateSelector;
 
-    this._elementTemplate = document.querySelector(this._templateSelector).content;
-    this._handleImageClick = () => openPreview({
-      name: this._name,
-      link: this._link,
-    });
-
     this.created = this._create();
   }
 
-  _toggleLike(e) {
-    e.target.classList.toggle('element__like-button_active');
+  get _template() {
+    return document.querySelector(this._templateSelector).content.firstElementChild;
   }
 
-  _remove(e) {
-    e.target.parentNode.remove();
+  _preview() {
+    openPreview({
+      name: this._name,
+      link: this._link,
+    });
+  }
+
+  _toggleLike() {
+    this._likeButton.classList.toggle('element__like-button_active');
+  }
+
+  _remove() {
+    this._card.remove();
+  }
+
+  _handleClick = e => {
+    switch (e.target) {
+      case this._imgElement:
+        this._preview();
+        break;
+    
+      case this._trashButton:
+        this._remove();
+        break;
+      
+      case this._likeButton:
+        this._toggleLike();
+        break;
+    }
+  }
+
+  _setListeners() {
+    this._card.addEventListener('click', this._handleClick);
   }
 
   _buildImage(element) {
     element.src = this._link;
-
-    element.addEventListener('click', this._handleImageClick);
-  }
-
-  _buildTrashButton(element) {
-    element.addEventListener('click', this._remove);
+    element.alt = this._name;
   }
 
   _buildTitle(element) {
     element.textContent = this._name;
   }
 
-  _buildLikeButton(element) {
-    element.addEventListener('click', this._toggleLike);
-  }
-
   _create() {
-    const card = this._elementTemplate.firstElementChild.cloneNode(1);
+    this._card = this._template.cloneNode(1);
 
-    const imgElement = card.querySelector('.element__image');
-    this._buildImage(imgElement);
+    this._imgElement = this._card.querySelector('.element__image');
+    this._buildImage(this._imgElement);
 
-    const trashButton = card.querySelector('.element__trash-button');
-    this._buildTrashButton(trashButton);
+    this._trashButton = this._card.querySelector('.element__trash-button');
 
-    const titleElement = card.querySelector('.element__title');
-    this._buildTitle(titleElement);
+    this._titleElement = this._card.querySelector('.element__title');
+    this._buildTitle(this._titleElement);
   
-    const likeButton = card.querySelector('.element__like-button');
-    this._buildLikeButton(likeButton);
+    this._likeButton = this._card.querySelector('.element__like-button');
 
-    return card;
+    this._setListeners();
+
+    return this._card;
   }
 }
