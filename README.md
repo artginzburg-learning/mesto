@@ -23,6 +23,7 @@ Project 7: <kbd>Currently in development...</kbd>
 - Flexbox & Grid Layout
 - JavaScript (Classes, Modules)
 - Live form validation
+- Keyboard, input and mouse events
 - [Image optimization](https://tinypng.com/)
 - Version Control: Git
 
@@ -50,12 +51,6 @@ Project 7: <kbd>Currently in development...</kbd>
 ## Планы по доработке
 
 - [ ] Делегировать события в классе FormValidator и верхней области видимости index.js (Done: class Card, class Popup, class Form)
-- [x] Валидация форм (Включение валидации вызовом enableValidation, настройки передавать аргументом в виде объекта) в отдельном файле validate.js
-- [x] Закрывать поп-апы по клику на оверлей
-- [x] Закрывать поп-апы по нажатию на Esc
-- [x] Дописать используемые [технологии](#технологии)
-- [x] Создать недоработки
-- [x] Написать планы по доработке
 
 <br>
 <br>
