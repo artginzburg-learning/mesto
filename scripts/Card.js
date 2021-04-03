@@ -51,7 +51,7 @@ export default class Card {
 
   _buildImage(element) {
     element.src = this._link;
-    element.alt = this._name;
+    element.alt = this._name; // .alt seems useless in the context of a card which has a title
   }
 
   _buildTitle(element) {
