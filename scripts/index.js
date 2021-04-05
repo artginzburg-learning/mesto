@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import Form from "./Popup__Form.js";
 import FormValidator from "./FormValidator.js";
 
 const defaultFormConfig = {
@@ -8,73 +9,6 @@ const defaultFormConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
-
-class Popup {
-  constructor(element) {
-    this._element = element;
-
-    this._closeButton = this._element.querySelector('.popup__close-button');
-  }
-
-  _elementOpenedClass = 'popup_opened';
-
-  toggle = () => {
-    this._element.classList.contains(this._elementOpenedClass)
-      ? this._removeListeners()
-      : this._setListeners();
-
-    this._element.classList.toggle(this._elementOpenedClass);
-  }
-
-  _clickHandler = e =>
-    (e.target === e.currentTarget || e.target === this._closeButton)
-      && this.toggle();
-
-  _keypressHandler = e =>
-    (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
-      && this.toggle();
-
-  _setListeners() {
-    this._element.addEventListener('click', this._clickHandler);
-
-    document.addEventListener('keypress', this._keypressHandler);
-  }
-  _removeListeners() {
-    this._element.removeEventListener('click', this._clickHandler);
-
-    document.removeEventListener('keypress', this._keypressHandler);
-  }
-}
-
-class Form extends Popup {
-  constructor(element) {
-    super(element);
-
-    this.form = this._element.querySelector('.popup__form');
-
-    this._fullSubmitHandler = e => {
-      e.preventDefault();
-  
-      this.submitHandler
-        && this.submitHandler();
-  
-      this.toggle();
-
-      document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
-    }
-  }
-
-  _setListeners() {
-    super._setListeners();
-    
-    this.form.addEventListener('submit', this._fullSubmitHandler);
-  }
-  _removeListeners() {
-    super._removeListeners();
-
-    this.form.removeEventListener('submit', this._fullSubmitHandler);
-  }
-}
 
 // FEAT: Profile editing
 
@@ -142,22 +76,6 @@ elementEditor.submitHandler = () => {
   elementEditor.form.reset();
 };
 
-//  FEAT: Image preview
-
-const imageViewerPopup = document.querySelector('#image-viewer');
-const imageViewer = new Popup(imageViewerPopup);
-
-const popupImage = imageViewerPopup.querySelector('.popup__image');
-const popupCaption = imageViewerPopup.querySelector('.popup__caption');
-
-export default function openPreview(data) {
-  popupImage.src = data.link;
-
-  popupCaption.textContent = data.name;
-
-  imageViewer.toggle();
-}
-
 // FEAT: Initial card loading
 
 const initialCards = [
@@ -187,6 +105,6 @@ const initialCards = [
   }
 ];
 
-initialCards.forEach(card =>
-  createInsertDefaultCard(card)
+initialCards.forEach(
+  createInsertDefaultCard
 );

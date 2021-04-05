@@ -1,4 +1,12 @@
-import openPreview from "./index.js";
+import Popup from "./Popup.js";
+
+//  FEAT: Image preview
+
+const imageViewerPopup = document.querySelector('#image-viewer');
+const imageViewer = new Popup(imageViewerPopup);
+
+const popupImage = imageViewerPopup.querySelector('.popup__image');
+const popupCaption = imageViewerPopup.querySelector('.popup__caption');
 
 export default class Card {
   constructor(cardData, templateSelector) {
@@ -14,39 +22,24 @@ export default class Card {
     return document.querySelector(this._templateSelector).content.firstElementChild;
   }
 
-  _preview() {
-    openPreview({
-      name: this._name,
-      link: this._link,
-    });
+  _preview = () => {
+    popupImage.src = this._link;
+
+    popupCaption.textContent = this._name;
+
+    imageViewer.toggle();
   }
 
-  _toggleLike() {
+  _toggleLike = () =>
     this._likeButton.classList.toggle('element__like-button_active');
-  }
 
-  _remove() {
+  _remove = () =>
     this._card.remove();
-  }
-
-  _handleClick = e => {
-    switch (e.target) {
-      case this._imgElement:
-        this._preview();
-        break;
-    
-      case this._trashButton:
-        this._remove();
-        break;
-      
-      case this._likeButton:
-        this._toggleLike();
-        break;
-    }
-  }
 
   _setListeners() {
-    this._card.addEventListener('click', this._handleClick);
+    this._imgElement.addEventListener('click', this._preview);
+    this._trashButton.addEventListener('click', this._remove);
+    this._likeButton.addEventListener('click', this._toggleLike);
   }
 
   _buildImage(element) {
