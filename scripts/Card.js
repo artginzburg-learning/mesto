@@ -24,6 +24,7 @@ export default class Card {
 
   _preview = () => {
     popupImage.src = this._link;
+    popupImage.alt = this._name; // .alt is excessive in this context. For a blind person accessing the page through a screen reader, this would sound like duplicated information - "Image Curonian Spit Curonian Spit"
 
     popupCaption.textContent = this._name;
 
@@ -44,7 +45,7 @@ export default class Card {
 
   _buildImage(element) {
     element.src = this._link;
-    element.alt = this._name; // .alt seems useless in the context of a card which has a title
+    element.alt = this._name; // .alt is excessive
   }
 
   _buildTitle(element) {
