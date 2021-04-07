@@ -1,6 +1,6 @@
-import Card from "./Card.js";
-import Form from "./Popup__Form.js";
-import FormValidator from "./FormValidator.js";
+import Card from './Card.js';
+import Form from './Popup__Form.js';
+import FormValidator from './FormValidator.js';
 
 const defaultFormConfig = {
   formSelector: '.popup__form',
@@ -80,28 +80,28 @@ elementEditor.submitHandler = () => {
 
 const initialCards = [
   {
-    name: "Алтай",
-    link: "./images/element-altai.jpg"
+    name: 'Алтай',
+    link: './images/element-altai.jpg'
   },
   {
-    name: "Кольский",
-    link: "./images/element-kolsky.jpg"
+    name: 'Кольский',
+    link: './images/element-kolsky.jpg'
   },
   {
-    name: "Куршская коса",
-    link: "./images/element-kosa.jpg"
+    name: 'Куршская коса',
+    link: './images/element-kosa.jpg'
   },
   {
-    name: "Гора Синай",
-    link: "./images/element-sinai.jpg"
+    name: 'Гора Синай',
+    link: './images/element-sinai.jpg'
   },
   {
-    name: "Путино",
-    link: "./images/element-putino.jpg"
+    name: 'Путино',
+    link: './images/element-putino.jpg'
   },
   {
-    name: "Замогилье (деревня)",
-    link: "./images/element-zamogilye.jpg"
+    name: 'Замогилье (деревня)',
+    link: './images/element-zamogilye.jpg'
   }
 ];
 
