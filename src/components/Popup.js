@@ -7,38 +7,34 @@ export default class Popup {
 
   _elementOpenedClass = 'popup_opened';
 
-  _open() {
-    this._setListeners();
+  open() {
+    this.setEventListeners();
+
+    this._element.classList.add(this._elementOpenedClass)
   }
 
-  _close() {
-    this._removeListeners();
-  }
+  close() {
+    this.removeEventListeners();
 
-  toggle = () => {
-    this._element.classList.contains(this._elementOpenedClass)
-      ? this._close()
-      : this._open();
-
-    this._element.classList.toggle(this._elementOpenedClass);
+    this._element.classList.remove(this._elementOpenedClass)
   }
 
   _clickHandler = e =>
     (e.target === e.currentTarget || e.target === this._closeButton)
-      && this.toggle();
+      && this.close();
 
   _handleEscClose = e =>
     (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
-      && this.toggle();
+      && this.close();
 
-  _setListeners() {
+  setEventListeners() {
     this._element.addEventListener('click', this._clickHandler);
 
-    document.addEventListener('keypress', this._handleEscClose);
+    document.addEventListener('keydown', this._handleEscClose);
   }
-  _removeListeners() {
+  _removeEventListeners() {
     this._element.removeEventListener('click', this._clickHandler);
 
-    document.removeEventListener('keypress', this._handleEscClose);
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 }

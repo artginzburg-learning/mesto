@@ -40,7 +40,7 @@ const profileEditorOpenButton = document.querySelector('.profile__edit-button');
 profileEditorOpenButton.addEventListener('click', () => {
   profileEditor.form.reset();
 
-  profileEditor.toggle();
+  profileEditor.open();
 });
 
 profileEditor.submitHandler = () => {
@@ -66,7 +66,7 @@ const cardsList = new Section({
         imageViewer._name = data.name;
         imageViewer._link = data.link;
     
-        imageViewer.toggle();
+        imageViewer.open();
       }
     );
 
@@ -87,7 +87,7 @@ const titleInput = elementEditor.form.elements.title;
 const linkInput = elementEditor.form.elements.link;
 
 const elementEditorOpenButton = document.querySelector('.profile__add-button');
-elementEditorOpenButton.addEventListener('click', elementEditor.toggle);
+elementEditorOpenButton.addEventListener('click', () => elementEditor.open());
 
 elementEditor.submitHandler = () => {
   const data = {

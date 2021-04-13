@@ -12,19 +12,19 @@ export default class PopupWithForm extends Popup {
       this.submitHandler
         && this.submitHandler();
   
-      this.toggle();
+      this.close();
 
       document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
     }
   }
 
-  _setListeners() {
-    super._setListeners();
+  setEventListeners() {
+    super.setEventListeners();
     
     this.form.addEventListener('submit', this._fullSubmitHandler);
   }
-  _removeListeners() {
-    super._removeListeners();
+  _removeEventListeners() {
+    super._removeEventListeners();
 
     this.form.removeEventListener('submit', this._fullSubmitHandler);
   }
