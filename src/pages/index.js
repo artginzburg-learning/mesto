@@ -62,12 +62,7 @@ const cardsList = new Section({
     const cardInstance = new Card(
       data,
       '#element-template', 
-      () => {
-        imageViewer._name = data.name;
-        imageViewer._link = data.link;
-    
-        imageViewer.open();
-      }
+      () => imageViewer.open(data)
     );
 
     cardsList.setItem(cardInstance.created);
@@ -95,6 +90,4 @@ elementEditor.submitHandler = () => {
     link: linkInput.value,
   };
   cardsList.renderer(data);
-
-  elementEditor.form.reset();
 };
