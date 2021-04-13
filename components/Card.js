@@ -1,11 +1,8 @@
-import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 
 //  FEAT: Image preview
 
-const imageViewer = new Popup('#image-viewer');
-
-const popupImage = imageViewer._element.querySelector('.popup__image');
-const popupCaption = imageViewer._element.querySelector('.popup__caption');
+const imageViewer = new PopupWithImage('#image-viewer');
 
 export default class Card {
   constructor(cardData, templateSelector) {
@@ -22,10 +19,8 @@ export default class Card {
   }
 
   _preview = () => {
-    popupImage.src = this._link;
-    popupImage.alt = this._name; // .alt is excessive in this context. For a blind person accessing the page through a screen reader, this would sound like duplicated information - "Image Curonian Spit Curonian Spit"
-
-    popupCaption.textContent = this._name;
+    imageViewer._name = this._name;
+    imageViewer._link = this._link;
 
     imageViewer.toggle();
   }
@@ -44,7 +39,7 @@ export default class Card {
 
   _buildImage(element) {
     element.src = this._link;
-    element.alt = this._name; // .alt is excessive
+    element.alt = this._name;
   }
 
   _buildTitle(element) {

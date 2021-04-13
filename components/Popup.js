@@ -7,10 +7,18 @@ export default class Popup {
 
   _elementOpenedClass = 'popup_opened';
 
+  _open() {
+    this._setListeners();
+  }
+
+  _close() {
+    this._removeListeners();
+  }
+
   toggle = () => {
     this._element.classList.contains(this._elementOpenedClass)
-      ? this._removeListeners()
-      : this._setListeners();
+      ? this._close()
+      : this._open();
 
     this._element.classList.toggle(this._elementOpenedClass);
   }
