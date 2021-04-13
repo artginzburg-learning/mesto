@@ -1,28 +1,17 @@
-import PopupWithImage from './PopupWithImage.js';
-
-//  FEAT: Image preview
-
-const imageViewer = new PopupWithImage('#image-viewer');
-
 export default class Card {
-  constructor(cardData, templateSelector) {
+  constructor(cardData, templateSelector, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
 
     this._templateSelector = templateSelector;
+
+    this._handleCardClick = handleCardClick;
 
     this.created = this._create();
   }
 
   get _template() {
     return document.querySelector(this._templateSelector).content.firstElementChild;
-  }
-
-  _preview = () => {
-    imageViewer._name = this._name;
-    imageViewer._link = this._link;
-
-    imageViewer.toggle();
   }
 
   _toggleLike = () =>
@@ -32,7 +21,7 @@ export default class Card {
     this._card.remove();
 
   _setListeners() {
-    this._imgElement.addEventListener('click', this._preview);
+    this._imgElement.addEventListener('click', this._handleCardClick);
     this._trashButton.addEventListener('click', this._remove);
     this._likeButton.addEventListener('click', this._toggleLike);
   }

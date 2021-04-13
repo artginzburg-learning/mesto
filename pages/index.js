@@ -1,5 +1,6 @@
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
@@ -47,12 +48,25 @@ profileEditor.submitHandler = () => {
   });
 };
 
+//  FEAT: Image preview
+
+const imageViewer = new PopupWithImage('#image-viewer');
+
 // FEAT: Initial card loading
 
 const cardsList = new Section({
   items: initialCards,
   renderer: data => {
-    const cardInstance = new Card(data, '#element-template');
+    const cardInstance = new Card(
+      data,
+      '#element-template', 
+      () => {
+        imageViewer._name = data.name;
+        imageViewer._link = data.link;
+    
+        imageViewer.toggle();
+      }
+    );
 
     cardsList.setItem(cardInstance.created);
   }
