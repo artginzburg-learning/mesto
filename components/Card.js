@@ -2,11 +2,10 @@ import Popup from './Popup.js';
 
 //  FEAT: Image preview
 
-const imageViewerPopup = document.querySelector('#image-viewer');
-const imageViewer = new Popup(imageViewerPopup);
+const imageViewer = new Popup('#image-viewer');
 
-const popupImage = imageViewerPopup.querySelector('.popup__image');
-const popupCaption = imageViewerPopup.querySelector('.popup__caption');
+const popupImage = imageViewer._element.querySelector('.popup__image');
+const popupCaption = imageViewer._element.querySelector('.popup__caption');
 
 export default class Card {
   constructor(cardData, templateSelector) {

@@ -1,5 +1,5 @@
 import Card from '../components/Card.js';
-import Form from '../components/Popup__Form.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 
@@ -10,8 +10,7 @@ import {
 
 // FEAT: Profile editing
 
-const profileEditorPopup = document.querySelector('#profile-editor');
-const profileEditor = new Form(profileEditorPopup);
+const profileEditor = new PopupWithForm('#profile-editor');
 
 const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
 profileEditorValidator.enableValidation();
@@ -56,8 +55,7 @@ cardsList.renderItems();
 
 // FEAT: Card adding
 
-const elementEditorPopup = document.querySelector('#element-editor');
-const elementEditor = new Form(elementEditorPopup);
+const elementEditor = new PopupWithForm('#element-editor');
 
 const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
 elementEditorValidator.enableValidation();

@@ -1,6 +1,6 @@
 export default class Popup {
-  constructor(element) {
-    this._element = element;
+  constructor(elementSelector) {
+    this._element = document.querySelector(elementSelector);
 
     this._closeButton = this._element.querySelector('.popup__close-button');
   }
@@ -19,18 +19,18 @@ export default class Popup {
     (e.target === e.currentTarget || e.target === this._closeButton)
       && this.toggle();
 
-  _keypressHandler = e =>
+  _handleEscClose = e =>
     (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
       && this.toggle();
 
   _setListeners() {
     this._element.addEventListener('click', this._clickHandler);
 
-    document.addEventListener('keypress', this._keypressHandler);
+    document.addEventListener('keypress', this._handleEscClose);
   }
   _removeListeners() {
     this._element.removeEventListener('click', this._clickHandler);
 
-    document.removeEventListener('keypress', this._keypressHandler);
+    document.removeEventListener('keypress', this._handleEscClose);
   }
 }
