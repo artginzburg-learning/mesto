@@ -1,0 +1,41 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artginzburg/mesto.git"
+  },
+  "author": "Art Ginzburg",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/artginzburg/mesto/issues"
+  },
+  "homepage": "https://github.com/artginzburg/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.15",
+    "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "*",
+    "css-loader": "^5.2.1",
+    "cssnano": "^5.0.0",
+    "html-webpack-plugin": "^5.3.1",
+    "i": "^0.3.6",
+    "mini-css-extract-plugin": "^1.4.1",
+    "npm": "^7.9.0",
+    "postcss-loader": "^5.2.0",
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "core-js": "^3.10.1"
+  }
+}

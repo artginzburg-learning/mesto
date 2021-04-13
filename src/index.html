@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> <!-- 'maximum-scale' fixes auto-zooming on some mobile devices -->
     <title lang="en">Mesto · Russia</title>
-    <link rel="stylesheet" href="./pages/index.css">
 
     <meta lang="en" name="author" content="Art Ginzburg & Yandex.Praktikum">
     <link rel="canonical" href="https://artginzburg.github.io/mesto/">
@@ -14,14 +13,14 @@
   <body class="page">
     <header class="header">
       <a target="_self" href="https://github.com/artginzburg/mesto" class="logo header__logo">
-        <img class="logo__img" alt="Mesto" src="./images/logo.svg">
+        <img class="logo__img" alt="Mesto" src="<%=require('./images/logo.svg')%>">
       </a>
     </header>
 
     <main class="content">
 
       <section class="profile">
-        <img src="./images/avatar.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__description">Исследователь океана</p>
@@ -88,8 +87,5 @@
         </div>
       </li>
     </template>
-
-    <script type="module" src="./pages/index.js"></script>
-    <!-- script import is before body end since `defer` attr may be unsupported -->
   </body>
 </html>

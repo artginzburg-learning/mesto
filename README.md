@@ -10,6 +10,8 @@ Project 6: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 Project 7: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-7_final)</kbd>
 
+Project 8: <kbd>[First version](https://github.com/artginzburg/mesto/tree/project-8_review-1)</kbd>
+
 ## Описание
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
@@ -17,6 +19,7 @@ Project 7: <kbd>[Reviewed and accepted version of the project](https://github.co
 ## Технологии
 
 - BEM Methodology
+- Webpack
 - File Structure — Nested BEM
 - Adaptive design
 - CSS transformations and transitions
@@ -45,6 +48,8 @@ Project 7: <kbd>[Reviewed and accepted version of the project](https://github.co
     [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html)
     
     [Чеклист 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html)
+
+    [Чеклист 8](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-8/index.html)
   
 </details>
 
@@ -62,3 +67,12 @@ Project 7: <kbd>[Reviewed and accepted version of the project](https://github.co
   &nbsp;
   <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 </p>
+
+## Установка
+
+```bash
+git clone https://github.com/artginzburg/russian-travel
+cd russian-travel
+npm run dev
+```
+

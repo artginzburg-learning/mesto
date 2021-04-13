@@ -1,3 +1,10 @@
+import altaiImage from '../images/element-altai.jpg';
+import kolskyImage from '../images/element-kolsky.jpg';
+import kosaImage from '../images/element-kosa.jpg';
+import sinaiImage from '../images/element-sinai.jpg';
+import putinoImage from '../images/element-putino.jpg';
+import zamogilyeImage from '../images/element-zamogilye.jpg';
+
 export const defaultFormConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -9,26 +16,26 @@ export const defaultFormConfig = {
 export const initialCards = [
   {
     name: 'Алтай',
-    link: './images/element-altai.jpg'
+    link: altaiImage
   },
   {
     name: 'Кольский',
-    link: './images/element-kolsky.jpg'
+    link: kolskyImage
   },
   {
     name: 'Куршская коса',
-    link: './images/element-kosa.jpg'
+    link: kosaImage
   },
   {
     name: 'Гора Синай',
-    link: './images/element-sinai.jpg'
+    link: sinaiImage
   },
   {
     name: 'Путино',
-    link: './images/element-putino.jpg'
+    link: putinoImage
   },
   {
     name: 'Замогилье (деревня)',
-    link: './images/element-zamogilye.jpg'
+    link: zamogilyeImage
   }
 ];
