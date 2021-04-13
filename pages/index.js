@@ -1,14 +1,12 @@
-import Card from './Card.js';
-import Form from './Popup__Form.js';
-import FormValidator from './FormValidator.js';
+import Card from '../components/Card.js';
+import Form from '../components/Popup__Form.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 
-const defaultFormConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-};
+import {
+  defaultFormConfig,
+  initialCards
+} from '../utils/constants.js';
 
 // FEAT: Profile editing
 
@@ -43,6 +41,19 @@ profileEditor.submitHandler = () => {
   jobElement.textContent = jobInput.value;
 };
 
+// FEAT: Initial card loading
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: data => {
+    const cardInstance = new Card(data, '#element-template');
+
+    cardsList.setItem(cardInstance.created);
+  }
+}, '.elements__list');
+
+cardsList.renderItems();
+
 // FEAT: Card adding
 
 const elementEditorPopup = document.querySelector('#element-editor');
@@ -57,54 +68,12 @@ const linkInput = elementEditor.form.elements.link;
 const elementEditorOpenButton = document.querySelector('.profile__add-button');
 elementEditorOpenButton.addEventListener('click', elementEditor.toggle);
 
-const elementsContainer = document.querySelector('.elements__list');
-function addCard(card) {
-  elementsContainer.prepend(card.created);
-}
-function createInsertDefaultCard(data) {
-  const cardInstance = new Card(data, '#element-template');
-
-  addCard(cardInstance);
-}
-
 elementEditor.submitHandler = () => {
-  createInsertDefaultCard({
+  const data = {
     name: titleInput.value,
     link: linkInput.value,
-  });
+  };
+  cardsList.renderer(data);
 
   elementEditor.form.reset();
 };
-
-// FEAT: Initial card loading
-
-const initialCards = [
-  {
-    name: 'Алтай',
-    link: './images/element-altai.jpg'
-  },
-  {
-    name: 'Кольский',
-    link: './images/element-kolsky.jpg'
-  },
-  {
-    name: 'Куршская коса',
-    link: './images/element-kosa.jpg'
-  },
-  {
-    name: 'Гора Синай',
-    link: './images/element-sinai.jpg'
-  },
-  {
-    name: 'Путино',
-    link: './images/element-putino.jpg'
-  },
-  {
-    name: 'Замогилье (деревня)',
-    link: './images/element-zamogilye.jpg'
-  }
-];
-
-initialCards.forEach(
-  createInsertDefaultCard
-);
