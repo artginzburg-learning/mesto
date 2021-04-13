@@ -14,7 +14,7 @@ export default class Popup {
   }
 
   close() {
-    this.removeEventListeners();
+    this._removeEventListeners();
 
     this._element.classList.remove(this._elementOpenedClass)
   }
