@@ -14,41 +14,37 @@ import {
 
 // FEAT: Profile editing
 
-const profileEditor = new PopupWithForm('#profile-editor');
+const profileEditorSelector = '#profile-editor';
 
-const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
-profileEditorValidator.enableValidation();
+const profileEditorForm = document.querySelector(profileEditorSelector).querySelector('.popup__form');
 
-const nameInput = profileEditor.form.elements.name;
-const jobInput = profileEditor.form.elements.job;
+const nameInput = profileEditorForm.elements.name;
+const jobInput = profileEditorForm.elements.job;
 
 const profileUserInfo = new UserInfo({
   nameSelector: '.profile__name',
   jobSelector: '.profile__description'
 });
 
-profileEditor.form.addEventListener('reset', e => {
-  e.preventDefault();
+const profileEditor = new PopupWithForm(profileEditorSelector, () =>
+  profileUserInfo.setUserInfo({
+    name: nameInput.value,
+    job: jobInput.value
+  })
+);
 
+const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
+profileEditorValidator.enableValidation();
+
+const profileEditorOpenButton = document.querySelector('.profile__edit-button');
+profileEditorOpenButton.addEventListener('click', () => {
   const currentUserData = profileUserInfo.getUserInfo();
 
   nameInput.value = currentUserData.name;
   jobInput.value = currentUserData.job;
-});
-
-const profileEditorOpenButton = document.querySelector('.profile__edit-button');
-profileEditorOpenButton.addEventListener('click', () => {
-  profileEditor.form.reset();
 
   profileEditor.open();
 });
-
-profileEditor.submitHandler = () => {
-  profileUserInfo.setUserInfo({
-    name: nameInput.value,
-    job: jobInput.value
-  });
-};
 
 //  FEAT: Image preview
 
@@ -73,21 +69,23 @@ cardsList.renderItems();
 
 // FEAT: Card adding
 
-const elementEditor = new PopupWithForm('#element-editor');
+const elementEditorSelector = '#element-editor';
 
-const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
-elementEditorValidator.enableValidation();
+const elementEditorForm = document.querySelector(elementEditorSelector).querySelector('.popup__form');
 
-const titleInput = elementEditor.form.elements.title;
-const linkInput = elementEditor.form.elements.link;
+const titleInput = elementEditorForm.elements.title;
+const linkInput = elementEditorForm.elements.link;
 
-const elementEditorOpenButton = document.querySelector('.profile__add-button');
-elementEditorOpenButton.addEventListener('click', () => elementEditor.open());
-
-elementEditor.submitHandler = () => {
+const elementEditor = new PopupWithForm(elementEditorSelector, () => {
   const data = {
     name: titleInput.value,
     link: linkInput.value,
   };
   cardsList.renderer(data);
-};
+});
+
+const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
+elementEditorValidator.enableValidation();
+
+const elementEditorOpenButton = document.querySelector('.profile__add-button');
+elementEditorOpenButton.addEventListener('click', () => elementEditor.open());

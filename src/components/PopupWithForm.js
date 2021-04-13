@@ -1,32 +1,34 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor(elementSelector) {
+  constructor(elementSelector, formSubmitHandler) {
     super(elementSelector);
 
     this.form = this._element.querySelector('.popup__form');
 
-    this._fullSubmitHandler = e => {
-      e.preventDefault();
-  
-      this.submitHandler
-        && this.submitHandler();
-  
-      this.close();
+    this._formSubmitHandler = formSubmitHandler;
+  }
 
-      document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
-    }
+  _defaultFormSubmitHandler = e => {
+    e.preventDefault();
+
+    this._formSubmitHandler
+      && this._formSubmitHandler();
+
+    this.close();
+
+    document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
   }
 
   setEventListeners() {
     super.setEventListeners();
     
-    this.form.addEventListener('submit', this._fullSubmitHandler);
+    this.form.addEventListener('submit', this._defaultFormSubmitHandler);
   }
   _removeEventListeners() {
     super._removeEventListeners();
 
-    this.form.removeEventListener('submit', this._fullSubmitHandler);
+    this.form.removeEventListener('submit', this._defaultFormSubmitHandler);
   }
 
   close() {
