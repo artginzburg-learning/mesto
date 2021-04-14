@@ -7,18 +7,6 @@ export default class Popup {
 
   _elementOpenedClass = 'popup_opened';
 
-  open() {
-    this.setEventListeners();
-
-    this._element.classList.add(this._elementOpenedClass)
-  }
-
-  close() {
-    this._removeEventListeners();
-
-    this._element.classList.remove(this._elementOpenedClass)
-  }
-
   _clickHandler = e =>
     (e.target === e.currentTarget || e.target === this._closeButton)
       && this.close();
@@ -27,14 +15,19 @@ export default class Popup {
     (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)
       && this.close();
 
-  setEventListeners() {
-    this._element.addEventListener('click', this._clickHandler);
+  open() {
+    this._element.classList.add(this._elementOpenedClass);
 
     document.addEventListener('keydown', this._handleEscClose);
   }
-  _removeEventListeners() {
-    this._element.removeEventListener('click', this._clickHandler);
+
+  close() {
+    this._element.classList.remove(this._elementOpenedClass);
 
     document.removeEventListener('keydown', this._handleEscClose);
+  }
+
+  setEventListeners() {
+    this._element.addEventListener('click', this._clickHandler);
   }
 }

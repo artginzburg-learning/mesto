@@ -26,7 +26,8 @@ const profileEditor = new PopupWithForm(profileEditorSelector, (data) =>
     name: data.name,
     job: data.job
   })
-); 
+);
+profileEditor.setEventListeners();
 
 const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
 profileEditorValidator.enableValidation();
@@ -49,6 +50,7 @@ profileEditorOpenButton.addEventListener('click', () => {
 //  FEAT: Image preview
 
 const imageViewer = new PopupWithImage('#image-viewer');
+imageViewer.setEventListeners();
 
 // FEAT: Initial card loading
 
@@ -83,6 +85,7 @@ const elementEditor = new PopupWithForm(elementEditorSelector, () => {
   };
   cardsList.renderer(data);
 });
+elementEditor.setEventListeners();
 
 const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
 elementEditorValidator.enableValidation();
