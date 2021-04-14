@@ -73,16 +73,10 @@ cardsList.renderItems();
 
 const elementEditorSelector = '#element-editor';
 
-const elementEditorForm = document.querySelector(elementEditorSelector).querySelector('.popup__form');
+const elementEditor = new PopupWithForm(elementEditorSelector, (data) => {
+  data.name = data.title;
+  delete data.title;
 
-const titleInput = elementEditorForm.elements.title;
-const linkInput = elementEditorForm.elements.link;
-
-const elementEditor = new PopupWithForm(elementEditorSelector, () => {
-  const data = {
-    name: titleInput.value,
-    link: linkInput.value,
-  };
   cardsList.renderer(data);
 });
 elementEditor.setEventListeners();
