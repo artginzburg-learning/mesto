@@ -16,25 +16,25 @@ import {
 
 const profileEditorSelector = '#profile-editor';
 
-const profileEditorForm = document.querySelector(profileEditorSelector).querySelector('.popup__form');
-
-const nameInput = profileEditorForm.elements.name;
-const jobInput = profileEditorForm.elements.job;
-
 const profileUserInfo = new UserInfo({
   nameSelector: '.profile__name',
   jobSelector: '.profile__description'
 });
 
-const profileEditor = new PopupWithForm(profileEditorSelector, () =>
+const profileEditor = new PopupWithForm(profileEditorSelector, (data) =>
   profileUserInfo.setUserInfo({
-    name: nameInput.value,
-    job: jobInput.value
+    name: data.name,
+    job: data.job
   })
-);
+); 
 
 const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
 profileEditorValidator.enableValidation();
+
+const {
+  name: nameInput,
+  job: jobInput
+} = profileEditor.form.elements;
 
 const profileEditorOpenButton = document.querySelector('.profile__edit-button');
 profileEditorOpenButton.addEventListener('click', () => {

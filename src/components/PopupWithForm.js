@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
     e.preventDefault();
 
     this._formSubmitHandler
-      && this._formSubmitHandler();
+      && this._formSubmitHandler(this._getInputValues());
 
     this.close();
 
@@ -39,10 +39,10 @@ export default class PopupWithForm extends Popup {
 
   _getInputValues() {
     const { elements } = this.form;
-    const values = [];
+    const values = {};
     Array.from(elements).forEach(el => {
       if (el.tagName === 'INPUT') {
-        values.push(el.value);
+        values[el.name] = el.value;
       }
     })
     return values;
