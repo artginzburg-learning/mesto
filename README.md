@@ -10,7 +10,7 @@ Project 6: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 Project 7: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-7_final)</kbd>
 
-Project 8: <kbd>[First version](https://github.com/artginzburg/mesto/tree/project-8_review-2)</kbd>
+Project 8: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-8_final)</kbd>
 
 ## Описание
 
