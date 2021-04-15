@@ -16,6 +16,10 @@ Project 8: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
 
+### Среда исполнения
+
+> [NodeJS](https://nodejs.org) — программная платформа с открытым исходным кодом, основанная на движке V8, превращающая JavaScript из узкоспециализированного языка в язык общего назначения. 
+
 ## Установка
 
 ```bash
