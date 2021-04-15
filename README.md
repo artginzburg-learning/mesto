@@ -16,6 +16,33 @@ Project 8: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
 
+## Установка
+
+```bash
+# Склонировать репозиторий
+git clone https://github.com/artginzburg/mesto
+# Перейти в папку проекта
+cd mesto
+# Установить зависимости
+npm i
+```
+
+## Запуск
+
+**Демонстрация в режиме разработки**
+```bash
+npm run dev
+```
+> Запускает локальный сервер на [localhost:6969](http://localhost:6969) · С автоматическим обновлением при внесении изменений
+
+**Сборка проекта для независимой эксплуатации**
+```bash
+npm run build
+```
+> Компилирует код в директорию `/dist`
+
+<br>
+
 ## Технологии
 
 - BEM Methodology
@@ -50,7 +77,7 @@ Project 8: <kbd>[Reviewed and accepted version of the project](https://github.co
     [Чеклист 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html)
 
     [Чеклист 8](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-8/index.html)
-  
+
 </details>
 
 ## Планы по доработке
@@ -67,12 +94,3 @@ Project 8: <kbd>[Reviewed and accepted version of the project](https://github.co
   &nbsp;
   <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 </p>
-
-## Установка
-
-```bash
-git clone https://github.com/artginzburg/russian-travel
-cd russian-travel
-npm run dev
-```
-
