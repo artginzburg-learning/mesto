@@ -12,6 +12,18 @@ import {
   initialCards
 } from '../utils/constants.js';
 
+// import api from '../components/Api.js';
+
+// api.getUserInfo()
+//   .then(result => {
+//     console.log(result)
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
+
+// api.editProfile('Artificial', 'описание на русском');
+
 // FEAT: Profile editing
 
 const profileEditorSelector = '#profile-editor';
@@ -68,6 +80,31 @@ const cardsList = new Section({
 }, '.elements__list');
 
 cardsList.renderItems();
+
+// FEAT: Server initial card loading
+
+// api.getInitialCards()
+//   .then(result => {
+//     console.log(result);
+
+//     const serverCardsList = new Section({
+//       items: result,
+//       renderer: data => {
+//         const cardInstance = new Card(
+//           data,
+//           '#element-template', 
+//           () => imageViewer.open(data)
+//         );
+
+//         serverCardsList.setItem(cardInstance.created);
+//       }
+//     }, '.elements__list');
+
+//     serverCardsList.renderItems();
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
 
 // FEAT: Card adding
 

@@ -12,6 +12,8 @@ Project 7: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 Project 8: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-8_final)</kbd>
 
+Project 9: <kbd>Currently in development...</kbd>
+
 ## Описание
 
 3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
@@ -75,6 +77,8 @@ npm run deploy
 
   [Макет 6](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6)
 
+  [Макет 9](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript-9-sprint)
+
 <details>
   <summary>Чеклисты</summary>
 
@@ -87,6 +91,8 @@ npm run deploy
     [Чеклист 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html)
 
     [Чеклист 8](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-8/index.html)
+
+    [Чеклист 9](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-9/index.html)
 
 </details>
 
