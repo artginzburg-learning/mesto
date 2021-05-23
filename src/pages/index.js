@@ -12,17 +12,7 @@ import {
   initialCards
 } from '../utils/constants.js';
 
-// import api from '../components/Api.js';
-
-// api.getUserInfo()
-//   .then(result => {
-//     console.log(result)
-//   })
-//   .catch(err => {
-//     console.error(err);
-//   });
-
-// api.editProfile('Artificial', 'описание на русском');
+import api from '../components/Api.js';
 
 // FEAT: Profile editing
 
@@ -30,15 +20,34 @@ const profileEditorSelector = '#profile-editor';
 
 const profileUserInfo = new UserInfo({
   nameSelector: '.profile__name',
-  jobSelector: '.profile__description'
+  jobSelector: '.profile__description',
+  avatarSelector: '.profile__avatar'
 });
 
-const profileEditor = new PopupWithForm(profileEditorSelector, (data) =>
-  profileUserInfo.setUserInfo({
-    name: data.name,
-    job: data.job
+api.getUserInfo()
+  .then(result => {
+    profileUserInfo.setUserInfo({
+      name: result.name,
+      job: result.about,
+      avatar: result.avatar
+    });
   })
-);
+  .catch(err => {
+    console.error(err);
+  });
+
+const profileEditor = new PopupWithForm(profileEditorSelector, (data) => {
+  api.editProfile(data.name, data.job)
+    .then(result => {
+      profileUserInfo.setUserInfo({
+        name: result.name,
+        job: result.about
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
 profileEditor.setEventListeners();
 
 const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
