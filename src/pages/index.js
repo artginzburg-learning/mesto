@@ -75,25 +75,25 @@ imageViewer.setEventListeners();
 
 // FEAT: Initial card loading
 
-function renderInitialCards(cards) {
-  const cardsList = new Section({
-    items: cards,
-    renderer: data => {
-      const cardInstance = new Card(
-        data,
-        '#element-template', 
-        () => imageViewer.open(data)
-      );
-
-      cardsList.setItem(cardInstance.created);
-    }
-  }, '.elements__list');
-
-  cardsList.renderItems();
-}
+let cardsList;
 
 api.getInitialCards()
-  .then(renderInitialCards)
+  .then(result => {
+    cardsList = new Section({
+      items: result,
+      renderer: data => {
+        const cardInstance = new Card(
+          data,
+          '#element-template', 
+          () => imageViewer.open(data)
+        );
+
+        cardsList.setItem(cardInstance.created);
+      }
+    }, '.elements__list');
+
+    cardsList.renderItems();
+  })
   .catch(err => {
     console.error(err);
   });
