@@ -23,7 +23,8 @@ export default class Card {
 
   _setListeners() {
     this._imgElement.addEventListener('click', this._handleCardClick);
-    this._trashButton.addEventListener('click', this._remove);
+    this._removable
+      && this._trashButton.addEventListener('click', this._remove);
     this._likeButton.addEventListener('click', this._toggleLike);
   }
 
@@ -48,9 +49,8 @@ export default class Card {
 
     this._trashButton = this._card.querySelector(trashButtonSelector);
 
-    if (this._removable) {
-      this._trashButton.classList.add(trashButtonVisibleClass);
-    }
+    this._removable
+      && this._trashButton.classList.add(trashButtonVisibleClass);
 
     this._titleElement = this._card.querySelector('.element__title');
     this._buildTitle(this._titleElement);
