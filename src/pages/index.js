@@ -75,45 +75,30 @@ imageViewer.setEventListeners();
 
 // FEAT: Initial card loading
 
-const cardsList = new Section({
-  items: initialCards,
-  renderer: data => {
-    const cardInstance = new Card(
-      data,
-      '#element-template', 
-      () => imageViewer.open(data)
-    );
+function renderInitialCards(cards) {
+  const cardsList = new Section({
+    items: cards,
+    renderer: data => {
+      const cardInstance = new Card(
+        data,
+        '#element-template', 
+        () => imageViewer.open(data)
+      );
 
-    cardsList.setItem(cardInstance.created);
-  }
-}, '.elements__list');
+      cardsList.setItem(cardInstance.created);
+    }
+  }, '.elements__list');
 
-cardsList.renderItems();
+  cardsList.renderItems();
+}
 
-// FEAT: Server initial card loading
+api.getInitialCards()
+  .then(renderInitialCards)
+  .catch(err => {
+    console.error(err);
 
-// api.getInitialCards()
-//   .then(result => {
-//     console.log(result);
-
-//     const serverCardsList = new Section({
-//       items: result,
-//       renderer: data => {
-//         const cardInstance = new Card(
-//           data,
-//           '#element-template', 
-//           () => imageViewer.open(data)
-//         );
-
-//         serverCardsList.setItem(cardInstance.created);
-//       }
-//     }, '.elements__list');
-
-//     serverCardsList.renderItems();
-//   })
-//   .catch(err => {
-//     console.error(err);
-//   });
+    renderInitialCards(initialCards);
+  });
 
 // FEAT: Card adding
 
