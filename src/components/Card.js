@@ -2,6 +2,7 @@ export default class Card {
   constructor(cardData, templateSelector, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
+    this._removable = cardData.removable;
 
     this._templateSelector = templateSelector;
 
@@ -41,7 +42,15 @@ export default class Card {
     this._imgElement = this._card.querySelector('.element__image');
     this._buildImage(this._imgElement);
 
-    this._trashButton = this._card.querySelector('.element__trash-button');
+    const trashButtonClass = 'element__trash-button';
+    const trashButtonSelector = `.${trashButtonClass}`;
+    const trashButtonVisibleClass = `${trashButtonClass}_visible`
+
+    this._trashButton = this._card.querySelector(trashButtonSelector);
+
+    if (this._removable) {
+      this._trashButton.classList.add(trashButtonVisibleClass);
+    }
 
     this._titleElement = this._card.querySelector('.element__title');
     this._buildTitle(this._titleElement);

@@ -24,19 +24,7 @@ const profileUserInfo = new UserInfo({
   avatarSelector: '.profile__avatar'
 });
 
-api.getUserInfo()
-  .then(result => {
-    profileUserInfo.setUserInfo({
-      name: result.name,
-      job: result.about,
-      avatar: result.avatar
-    });
-  })
-  .catch(err => {
-    console.error(err);
-  });
-
-const profileEditor = new PopupWithForm(profileEditorSelector, (data) => {
+const profileEditor = new PopupWithForm(profileEditorSelector, data => {
   api.editProfile(data.name, data.job)
     .then(result => {
       profileUserInfo.setUserInfo({
@@ -76,23 +64,43 @@ imageViewer.setEventListeners();
 // FEAT: Initial card loading
 
 let cardsList;
+// let userId;
 
-api.getInitialCards()
+api.getUserInfo()
   .then(result => {
-    cardsList = new Section({
-      items: result.reverse(),
-      renderer: data => {
-        const cardInstance = new Card(
-          data,
-          '#element-template', 
-          () => imageViewer.open(data)
-        );
+    profileUserInfo.setUserInfo({
+      name: result.name,
+      job: result.about,
+      avatar: result.avatar
+    });
 
-        cardsList.setItem(cardInstance.created);
-      }
-    }, '.elements__list');
-
-    cardsList.renderItems();
+    return result._id;
+  })
+  .then(userId => {
+    api.getInitialCards()
+      .then(result => {
+        cardsList = new Section({
+          items: result.reverse(),
+          renderer: data => {
+            if (data.owner._id === userId) {
+              data.removable = 1;
+            }
+    
+            const cardInstance = new Card(
+              data,
+              '#element-template', 
+              () => imageViewer.open(data)
+            );
+    
+            cardsList.setItem(cardInstance.created);
+          }
+        }, '.elements__list');
+    
+        cardsList.renderItems();
+      })
+      .catch(err => {
+        console.error(err);
+      });
   })
   .catch(err => {
     console.error(err);
