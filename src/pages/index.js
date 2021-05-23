@@ -96,8 +96,6 @@ api.getInitialCards()
   .then(renderInitialCards)
   .catch(err => {
     console.error(err);
-
-    renderInitialCards(initialCards);
   });
 
 // FEAT: Card adding
