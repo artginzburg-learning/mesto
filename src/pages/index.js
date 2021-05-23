@@ -8,8 +8,7 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 
 import {
-  defaultFormConfig,
-  initialCards
+  defaultFormConfig
 } from '../utils/constants.js';
 
 import api from '../components/Api.js';
@@ -64,7 +63,6 @@ imageViewer.setEventListeners();
 // FEAT: Initial card loading
 
 let cardsList;
-// let userId;
 
 api.getUserInfo()
   .then(result => {

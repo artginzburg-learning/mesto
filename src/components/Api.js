@@ -66,7 +66,7 @@ class Api {
     return this._customFetch(`cards/likes/${cardId}`, 'PUT');
   }
 
-  unlikeCard(cardId) {
+  unLikeCard(cardId) {
     return this._customFetch(`cards/likes/${cardId}`, 'DELETE');
   }
 
