@@ -80,7 +80,7 @@ let cardsList;
 api.getInitialCards()
   .then(result => {
     cardsList = new Section({
-      items: result,
+      items: result.reverse(),
       renderer: data => {
         const cardInstance = new Card(
           data,
@@ -102,11 +102,17 @@ api.getInitialCards()
 
 const elementEditorSelector = '#element-editor';
 
-const elementEditor = new PopupWithForm(elementEditorSelector, (data) => {
+const elementEditor = new PopupWithForm(elementEditorSelector, data => {
   data.name = data.title;
   delete data.title;
 
-  cardsList.renderer(data);
+  api.addCard(data.name, data.link)
+    .then(result => {
+      cardsList.renderer(result);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 elementEditor.setEventListeners();
 
