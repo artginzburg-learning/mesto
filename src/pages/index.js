@@ -98,7 +98,6 @@ api.getUserInfo()
             if (data.likes.filter(user => user._id === userId).length) {
               data.liked = 1;
             }
-
             const cardInstance = new Card(
               data,
               '#element-template',
@@ -111,8 +110,9 @@ api.getUserInfo()
                 (data.liked
                   ? api.unLikeCard(data._id)
                   : api.likeCard(data._id))
-                    .then(() => {
+                    .then(result => {
                       cardInstance.toggleLike();
+                      cardInstance.updateLikes(result.likes.length);
                       data.liked = !data.liked;
                     })
                     .catch(console.error);

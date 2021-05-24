@@ -24,6 +24,10 @@ export default class Card {
   remove = () =>
     this._card.remove();
 
+  updateLikes(quantity) {
+    this._likeCounter.textContent = quantity;
+  }
+
   _setListeners() {
     this._imgElement.addEventListener('click', this._handleCardClick);
     this._removable
@@ -63,6 +67,9 @@ export default class Card {
     if (this.cardData.liked) {
       this.toggleLike();
     }
+
+    this._likeCounter = this._card.querySelector('.element__like-counter');
+    this.updateLikes(this.cardData.likes.length);
 
     this._setListeners();
 
