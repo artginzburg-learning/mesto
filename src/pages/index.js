@@ -17,11 +17,13 @@ import api from '../components/Api.js';
 
 const profileEditorSelector = '#profile-editor';
 
-const profileUserInfo = new UserInfo({
+const profileSelectors = {
   nameSelector: '.profile__name',
   jobSelector: '.profile__description',
   avatarSelector: '.profile__avatar'
-});
+};
+
+const profileUserInfo = new UserInfo(profileSelectors);
 
 const profileEditor = new PopupWithForm(profileEditorSelector, data => {
   api.editProfile(data.name, data.job)
@@ -54,6 +56,27 @@ profileEditorOpenButton.addEventListener('click', () => {
 
   profileEditor.open();
 });
+
+// FEAT: Avatar updating
+
+const avatarEditorSelector = '#avatar-editor';
+
+const avatarEditor = new PopupWithForm(avatarEditorSelector, data => {
+  api.updateAvatar(data.link)
+    .then(result => {
+      profileUserInfo.setUserInfo({
+        avatar: result.avatar
+      });
+    })
+    .catch(console.error);
+});
+avatarEditor.setEventListeners();
+
+const avatarEditorValidator = new FormValidator(defaultFormConfig, avatarEditor.form);
+avatarEditorValidator.enableValidation();
+
+const avatarEditorOpenButton = document.querySelector(profileSelectors.avatarSelector);
+avatarEditorOpenButton.addEventListener('click', () => avatarEditor.open());
 
 //  FEAT: Image preview
 
