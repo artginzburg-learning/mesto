@@ -95,6 +95,9 @@ api.getUserInfo()
             if (data.owner._id === userId) {
               data.removable = 1;
             }
+            if (data.likes.filter(user => user._id === userId).length) {
+              data.liked = 1;
+            }
 
             const cardInstance = new Card(
               data,
@@ -103,6 +106,16 @@ api.getUserInfo()
               () => {
                 deleteConfirmation.currentCard = cardInstance;
                 deleteConfirmation.open();
+              },
+              () => {
+                (data.liked
+                  ? api.unLikeCard(data._id)
+                  : api.likeCard(data._id))
+                    .then(() => {
+                      cardInstance.toggleLike();
+                      data.liked = !data.liked;
+                    })
+                    .catch(console.error);
               }
             );
 

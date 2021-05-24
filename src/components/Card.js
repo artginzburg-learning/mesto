@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(cardData, templateSelector, handleCardClick, handleDeleteClick) {
+  constructor(cardData, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._removable = cardData.removable;
@@ -9,6 +9,7 @@ export default class Card {
 
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
 
     this.created = this._create();
   }
@@ -17,7 +18,7 @@ export default class Card {
     return document.querySelector(this._templateSelector).content.firstElementChild;
   }
 
-  _toggleLike = () =>
+  toggleLike = () =>
     this._likeButton.classList.toggle('element__like-button_active');
 
   remove = () =>
@@ -27,7 +28,7 @@ export default class Card {
     this._imgElement.addEventListener('click', this._handleCardClick);
     this._removable
       && this._trashButton.addEventListener('click', this._handleDeleteClick);
-    this._likeButton.addEventListener('click', this._toggleLike);
+    this._likeButton.addEventListener('click', this._handleLikeClick);
   }
 
   _buildImage(element) {
@@ -56,8 +57,12 @@ export default class Card {
 
     this._titleElement = this._card.querySelector('.element__title');
     this._buildTitle(this._titleElement);
-  
+
     this._likeButton = this._card.querySelector('.element__like-button');
+
+    if (this.cardData.liked) {
+      this.toggleLike();
+    }
 
     this._setListeners();
 
