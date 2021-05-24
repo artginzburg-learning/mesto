@@ -1,10 +1,16 @@
 import Popup from './Popup.js';
 
+import {
+  defaultFormConfig
+} from '../utils/constants.js';
+
 export default class PopupWithForm extends Popup {
   constructor(elementSelector, formSubmitHandler) {
     super(elementSelector);
 
-    this.form = this._element.querySelector('.popup__form');
+    this.form = this._element.querySelector(defaultFormConfig.formSelector);
+    this._submitButton = this.form.querySelector(defaultFormConfig.submitButtonSelector);
+    this._submitButtonTitle = this._submitButton.textContent;
 
     this._formSubmitHandler = formSubmitHandler;
   }
@@ -12,10 +18,15 @@ export default class PopupWithForm extends Popup {
   _defaultFormSubmitHandler = e => {
     e.preventDefault();
 
-    this._formSubmitHandler
-      && this._formSubmitHandler(this._getInputValues());
+    this._submitButton.textContent = 'Сохранение...';
 
-    this.close();
+    this._formSubmitHandler
+      && this._formSubmitHandler(this._getInputValues())
+        .then(() => this.close())
+        .catch(console.error)
+        .finally(() => {
+          this._submitButton.textContent = this._submitButtonTitle;
+        });
 
     document.activeElement.blur(); // fixes mobile keyboard being stuck on the screen after form submission (due to `event.preventDefault()`)
   }

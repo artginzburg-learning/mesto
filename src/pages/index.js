@@ -25,18 +25,15 @@ const profileSelectors = {
 
 const profileUserInfo = new UserInfo(profileSelectors);
 
-const profileEditor = new PopupWithForm(profileEditorSelector, data => {
+const profileEditor = new PopupWithForm(profileEditorSelector, data =>
   api.editProfile(data.name, data.job)
-    .then(result => {
+    .then(result =>
       profileUserInfo.setUserInfo({
         name: result.name,
         job: result.about
-      });
-    })
-    .catch(err => {
-      console.error(err);
-    });
-});
+      })
+    )
+);
 profileEditor.setEventListeners();
 
 const profileEditorValidator = new FormValidator(defaultFormConfig, profileEditor.form);
@@ -61,15 +58,14 @@ profileEditorOpenButton.addEventListener('click', () => {
 
 const avatarEditorSelector = '#avatar-editor';
 
-const avatarEditor = new PopupWithForm(avatarEditorSelector, data => {
+const avatarEditor = new PopupWithForm(avatarEditorSelector, data =>
   api.updateAvatar(data.link)
-    .then(result => {
+    .then(result =>
       profileUserInfo.setUserInfo({
         avatar: result.avatar
-      });
-    })
-    .catch(console.error);
-});
+      })
+    )
+);
 avatarEditor.setEventListeners();
 
 const avatarEditorValidator = new FormValidator(defaultFormConfig, avatarEditor.form);
@@ -89,9 +85,8 @@ const deleteConfirmationSelector = '#delete-confirmation';
 
 const deleteConfirmation = new PopupWithForm(deleteConfirmationSelector, () => {
   const card = deleteConfirmation.currentCard;
-  api.deleteCard(card.cardData._id)
-    .then(card.remove)
-    .catch(console.error);
+  return api.deleteCard(card.cardData._id)
+    .then(card.remove);
 });
 deleteConfirmation.setEventListeners();
 
@@ -160,14 +155,10 @@ api.getUserInfo()
 
 const elementEditorSelector = '#element-editor';
 
-const elementEditor = new PopupWithForm(elementEditorSelector, data => {
-  data.name = data.title;
-  delete data.title;
-
-  api.addCard(data.name, data.link)
+const elementEditor = new PopupWithForm(elementEditorSelector, data =>
+  api.addCard(data.title, data.link)
     .then(cardsList.renderer)
-    .catch(console.error);
-});
+);
 elementEditor.setEventListeners();
 
 const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
