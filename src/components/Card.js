@@ -1,12 +1,14 @@
 export default class Card {
-  constructor(cardData, templateSelector, handleCardClick) {
+  constructor(cardData, templateSelector, handleCardClick, handleDeleteClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._removable = cardData.removable;
+    this.cardData = cardData;
 
     this._templateSelector = templateSelector;
 
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
 
     this.created = this._create();
   }
@@ -18,13 +20,13 @@ export default class Card {
   _toggleLike = () =>
     this._likeButton.classList.toggle('element__like-button_active');
 
-  _remove = () =>
+  remove = () =>
     this._card.remove();
 
   _setListeners() {
     this._imgElement.addEventListener('click', this._handleCardClick);
     this._removable
-      && this._trashButton.addEventListener('click', this._remove);
+      && this._trashButton.addEventListener('click', this._handleDeleteClick);
     this._likeButton.addEventListener('click', this._toggleLike);
   }
 

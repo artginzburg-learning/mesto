@@ -60,6 +60,18 @@ profileEditorOpenButton.addEventListener('click', () => {
 const imageViewer = new PopupWithImage('#image-viewer');
 imageViewer.setEventListeners();
 
+// FEAT: Card deleting
+
+const deleteConfirmationSelector = '#delete-confirmation';
+
+const deleteConfirmation = new PopupWithForm(deleteConfirmationSelector, () => {
+  const card = deleteConfirmation.currentCard;
+  api.deleteCard(card.cardData._id)
+    .then(card.remove)
+    .catch(console.error);
+});
+deleteConfirmation.setEventListeners();
+
 // FEAT: Initial card loading
 
 let cardsList;
@@ -83,17 +95,21 @@ api.getUserInfo()
             if (data.owner._id === userId) {
               data.removable = 1;
             }
-    
+
             const cardInstance = new Card(
               data,
-              '#element-template', 
-              () => imageViewer.open(data)
+              '#element-template',
+              () => imageViewer.open(data),
+              () => {
+                deleteConfirmation.currentCard = cardInstance;
+                deleteConfirmation.open();
+              }
             );
-    
+
             cardsList.setItem(cardInstance.created);
           }
         }, '.elements__list');
-    
+
         cardsList.renderItems();
       })
       .catch(err => {
@@ -113,12 +129,8 @@ const elementEditor = new PopupWithForm(elementEditorSelector, data => {
   delete data.title;
 
   api.addCard(data.name, data.link)
-    .then(result => {
-      cardsList.renderer(result);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    .then(cardsList.renderer)
+    .catch(console.error);
 });
 elementEditor.setEventListeners();
 
