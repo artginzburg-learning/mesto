@@ -7,15 +7,13 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 
+import api from '../components/Api.js';
+
 import {
   defaultFormConfig
 } from '../utils/constants.js';
 
-import api from '../components/Api.js';
-
 // FEAT: Profile editing
-
-const profileEditorSelector = '#profile-editor';
 
 const profileSelectors = {
   nameSelector: '.profile__name',
@@ -25,7 +23,7 @@ const profileSelectors = {
 
 const profileUserInfo = new UserInfo(profileSelectors);
 
-const profileEditor = new PopupWithForm(profileEditorSelector, data =>
+const profileEditor = new PopupWithForm('#profile-editor', data =>
   api.editProfile(data.name, data.job)
     .then(result =>
       profileUserInfo.setUserInfo({
@@ -56,9 +54,7 @@ profileEditorOpenButton.addEventListener('click', () => {
 
 // FEAT: Avatar updating
 
-const avatarEditorSelector = '#avatar-editor';
-
-const avatarEditor = new PopupWithForm(avatarEditorSelector, data =>
+const avatarEditor = new PopupWithForm('#avatar-editor', data =>
   api.updateAvatar(data.link)
     .then(result =>
       profileUserInfo.setUserInfo({
@@ -81,9 +77,7 @@ imageViewer.setEventListeners();
 
 // FEAT: Card deleting
 
-const deleteConfirmationSelector = '#delete-confirmation';
-
-const deleteConfirmation = new PopupWithForm(deleteConfirmationSelector, () => {
+const deleteConfirmation = new PopupWithForm('#delete-confirmation', () => {
   const card = deleteConfirmation.currentCard;
   return api.deleteCard(card.cardData._id)
     .then(card.remove);
@@ -143,19 +137,13 @@ api.getUserInfo()
 
         cardsList.renderItems();
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(console.error);
   })
-  .catch(err => {
-    console.error(err);
-  });
+  .catch(console.error);
 
 // FEAT: Card adding
 
-const elementEditorSelector = '#element-editor';
-
-const elementEditor = new PopupWithForm(elementEditorSelector, data =>
+const elementEditor = new PopupWithForm('#element-editor', data =>
   api.addCard(data.title, data.link)
     .then(cardsList.renderer)
 );
