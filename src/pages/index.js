@@ -9,9 +9,7 @@ import UserInfo from '../components/UserInfo.js';
 
 import api from '../components/Api.js';
 
-import {
-  defaultFormConfig
-} from '../utils/constants.js';
+import { defaultFormConfig } from '../utils/constants.js';
 
 // FEAT: Profile editing
 
@@ -84,60 +82,56 @@ const deleteConfirmation = new PopupWithForm('#delete-confirmation', () => {
 });
 deleteConfirmation.setEventListeners();
 
-// FEAT: Initial card loading
+// FEAT: Initial user data and cards loading
 
 let cardsList;
 
-api.getUserInfo()
-  .then(result => {
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards(),
+])
+  .then(([userData, initialCards]) => {
     profileUserInfo.setUserInfo({
-      name: result.name,
-      job: result.about,
-      avatar: result.avatar
+      name: userData.name,
+      job: userData.about,
+      avatar: userData.avatar
     });
 
-    return result._id;
-  })
-  .then(userId => {
-    api.getInitialCards()
-      .then(result => {
-        cardsList = new Section({
-          items: result.reverse(),
-          renderer: data => {
-            if (data.owner._id === userId) {
-              data.removable = 1;
-            }
-            if (data.likes.filter(user => user._id === userId).length) {
-              data.liked = 1;
-            }
-            const cardInstance = new Card(
-              data,
-              '#element-template',
-              () => imageViewer.open(data),
-              () => {
-                deleteConfirmation.currentCard = cardInstance;
-                deleteConfirmation.open();
-              },
-              () => {
-                (data.liked
-                  ? api.unLikeCard(data._id)
-                  : api.likeCard(data._id))
-                    .then(result => {
-                      cardInstance.toggleLike();
-                      cardInstance.updateLikes(result.likes.length);
-                      data.liked = !data.liked;
-                    })
-                    .catch(console.error);
-              }
-            );
-
-            cardsList.setItem(cardInstance.created);
+    cardsList = new Section({
+      items: initialCards.reverse(),
+      renderer: data => {
+        if (data.owner._id === userData._id) {
+          data.removable = 1;
+        }
+        if (data.likes.filter(user => user._id === userData._id).length) {
+          data.liked = 1;
+        }
+        const cardInstance = new Card(
+          data,
+          '#element-template',
+          () => imageViewer.open(data),
+          () => {
+            deleteConfirmation.currentCard = cardInstance;
+            deleteConfirmation.open();
+          },
+          () => {
+            (data.liked
+              ? api.unLikeCard(data._id)
+              : api.likeCard(data._id))
+                .then(result => {
+                  cardInstance.toggleLike();
+                  cardInstance.updateLikes(result.likes.length);
+                  data.liked = !data.liked;
+                })
+                .catch(console.error);
           }
-        }, '.elements__list');
+        );
 
-        cardsList.renderItems();
-      })
-      .catch(console.error);
+        cardsList.setItem(cardInstance.created);
+      }
+    }, '.elements__list');
+
+    cardsList.renderItems();
   })
   .catch(console.error);
 

@@ -1,6 +1,6 @@
 # [Место](https://artginzburg.github.io/mesto/)
 
-> Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
+> Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки. Ну, и пользователя кастомизировать, разумеется.
 
 Project 4: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-4_final)</kbd>
 
@@ -12,11 +12,11 @@ Project 7: <kbd>[Reviewed and accepted version of the project](https://github.co
 
 Project 8: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-8_final)</kbd>
 
-Project 9: <kbd>Currently in development...</kbd>
+Project 9: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-9_final)</kbd>
 
 ## Описание
 
-3-я курсовая работа в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
+3-я и 4-я курсовые работы в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
 
 ### Среда исполнения
 
@@ -57,6 +57,7 @@ npm run deploy
 
 ## Технологии
 
+- JSON API
 - BEM Methodology
 - Webpack
 - File Structure — Nested BEM
@@ -98,7 +99,7 @@ npm run deploy
 
 ## Планы по доработке
 
-- [ ] Делегировать события в классе FormValidator и верхней области видимости index.js (Done: class Card, class Popup, class Form)
+- [ ] Разобраться с грамотным делегированием событий
 
 <br>
 <br>
