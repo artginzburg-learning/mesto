@@ -1,9 +1,11 @@
 const cohortId = 'cohort-24';
 const token = '70313b07-c3c0-40aa-a296-04d0e6bc7885';
 
-const apiUrl = 'mesto.nomoreparties.co';
-const apiProtocol = 'https://';
-const apiVersion = 'v1';
+const api = {
+  url: 'mesto.nomoreparties.co',
+  protocol: 'https://',
+  version: 'v1',
+}
 
 class Api {
   constructor(options) {
@@ -17,7 +19,7 @@ class Api {
       : Promise.reject(`Ошибка: ${res.status}`);
 
   _customFetch(target, method, body) {
-    let options = {
+    const options = {
       headers: this._headers
     };
 
@@ -44,41 +46,35 @@ class Api {
     return this._customFetch('cards');
   }
 
-  editProfile(name, about) {
-    return this._customFetch('users/me', 'PATCH', {
+  editProfile = (name, about) =>
+    this._customFetch('users/me', 'PATCH', {
       name,
       about
     });
-  }
 
-  addCard(name, link) {
-    return this._customFetch('cards', 'POST', {
+  addCard = (name, link) =>
+    this._customFetch('cards', 'POST', {
       name,
       link
     });
-  }
 
-  deleteCard(cardId) {
-    return this._customFetch(`cards/${cardId}`, 'DELETE');
-  }
+  deleteCard = cardId =>
+    this._customFetch(`cards/${cardId}`, 'DELETE');
 
-  likeCard(cardId) {
-    return this._customFetch(`cards/likes/${cardId}`, 'PUT');
-  }
+  likeCard = cardId =>
+    this._customFetch(`cards/likes/${cardId}`, 'PUT');
 
-  unLikeCard(cardId) {
-    return this._customFetch(`cards/likes/${cardId}`, 'DELETE');
-  }
+  unLikeCard = cardId =>
+    this._customFetch(`cards/likes/${cardId}`, 'DELETE');
 
-  updateAvatar(link) {
-    return this._customFetch(`users/me/avatar`, 'PATCH', {
+  updateAvatar = link =>
+    this._customFetch(`users/me/avatar`, 'PATCH', {
       avatar: link
     });
-  }
 }
 
 export default new Api({
-  baseUrl: `${apiProtocol}${apiUrl}/${apiVersion}/${cohortId}`,
+  baseUrl: `${api.protocol}${api.url}/${api.version}/${cohortId}`,
   headers: {
     authorization: token
   }
