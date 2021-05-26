@@ -1,15 +1,15 @@
 import './index.css';
 
-import Card from '../components/Card.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import FormValidator from '../components/FormValidator.js';
-import Section from '../components/Section.js';
-import UserInfo from '../components/UserInfo.js';
+import Card from '../components/Card';
+import PopupWithForm from '../components/PopupWithForm';
+import PopupWithImage from '../components/PopupWithImage';
+import FormValidator from '../components/FormValidator';
+import Section from '../components/Section';
+import UserInfo from '../components/UserInfo';
 
-import api from '../components/Api.js';
+import api from '../components/Api';
 
-import { defaultFormConfig } from '../utils/constants.js';
+import { defaultFormConfig } from '../utils/constants';
 
 // FEAT: Profile editing
 
