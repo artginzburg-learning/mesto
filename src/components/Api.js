@@ -46,7 +46,7 @@ class Api {
     return this._customFetch('cards');
   }
 
-  editProfile = (name, about) =>
+  editProfile = ({ name, about }) =>
     this._customFetch('users/me', 'PATCH', {
       name,
       about
@@ -67,9 +67,9 @@ class Api {
   unLikeCard = cardId =>
     this._customFetch(`cards/likes/${cardId}`, 'DELETE');
 
-  updateAvatar = link =>
+  updateAvatar = ({ avatar }) =>
     this._customFetch(`users/me/avatar`, 'PATCH', {
-      avatar: link
+      avatar
     });
 }
 

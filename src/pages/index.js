@@ -15,18 +15,18 @@ import { defaultFormConfig } from '../utils/constants';
 
 const profileSelectors = {
   nameSelector: '.profile__name',
-  jobSelector: '.profile__description',
+  aboutSelector: '.profile__description',
   avatarSelector: '.profile__avatar'
 };
 
 const profileUserInfo = new UserInfo(profileSelectors);
 
 const profileEditor = new PopupWithForm('#profile-editor', data =>
-  api.editProfile(data.name, data.job)
-    .then(result =>
+  api.editProfile(data)
+    .then(({ name, about }) =>
       profileUserInfo.setUserInfo({
-        name: result.name,
-        job: result.about
+        name,
+        about
       })
     )
 );
@@ -37,7 +37,7 @@ profileEditorValidator.enableValidation();
 
 const {
   name: nameInput,
-  job: jobInput
+  about: aboutInput
 } = profileEditor.form.elements;
 
 const profileEditorOpenButton = document.querySelector('.profile__edit-button');
@@ -45,7 +45,7 @@ profileEditorOpenButton.addEventListener('click', () => {
   const currentUserData = profileUserInfo.getUserInfo();
 
   nameInput.value = currentUserData.name;
-  jobInput.value = currentUserData.job;
+  aboutInput.value = currentUserData.about;
 
   profileEditor.open();
 });
@@ -53,10 +53,10 @@ profileEditorOpenButton.addEventListener('click', () => {
 // FEAT: Avatar updating
 
 const avatarEditor = new PopupWithForm('#avatar-editor', data =>
-  api.updateAvatar(data.link)
-    .then(result =>
+  api.updateAvatar(data)
+    .then(({ avatar }) =>
       profileUserInfo.setUserInfo({
-        avatar: result.avatar
+        avatar
       })
     )
 );
@@ -91,10 +91,15 @@ Promise.all([
   api.getInitialCards(),
 ])
   .then(([userData, initialCards]) => {
+    const {
+      name,
+      about,
+      avatar
+    } = userData;
     profileUserInfo.setUserInfo({
-      name: userData.name,
-      job: userData.about,
-      avatar: userData.avatar
+      name,
+      about,
+      avatar
     });
 
     cardsList = new Section({
@@ -103,7 +108,9 @@ Promise.all([
         if (data.owner._id === userData._id) {
           data.removable = 1;
         }
-        if (data.likes.filter(user => user._id === userData._id).length) {
+        if (data.likes.filter(user =>
+          user._id === userData._id
+        ).length) {
           data.liked = 1;
         }
         const cardInstance = new Card(
@@ -116,8 +123,8 @@ Promise.all([
           },
           () => {
             (data.liked
-              ? api.unLikeCard(data._id)
-              : api.likeCard(data._id))
+              ? api.unLikeCard
+              : api.likeCard)(data._id)
                 .then(result => {
                   cardInstance.toggleLike();
                   cardInstance.updateLikes(result.likes.length);

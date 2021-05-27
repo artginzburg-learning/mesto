@@ -48,7 +48,7 @@
         <button type="reset" class="popup__close-button"></button>
         <h2 class="popup__title">Обновить аватар</h2>
         <form class="popup__form" action> <!-- 'action' attr is necessary for iOS to display blue 'Go' button on the keyboard -->
-          <input type="url" class="popup__input" name="link" id="profile-avatar" placeholder="Ссылка на картинку" required>
+          <input type="url" class="popup__input" name="avatar" id="profile-avatar" placeholder="Ссылка на картинку" required>
           <p class="popup__error" id="profile-avatar-error"></p>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
@@ -62,8 +62,8 @@
         <form class="popup__form" action>
           <input type="text" autocomplete="name" autocapitalize="words" class="popup__input" name="name" id="profile-name" placeholder="Имя" minlength="2" maxlength="40" required>
           <p class="popup__error" id="profile-name-error"></p>
-          <input type="text" class="popup__input" name="job" id="profile-job" placeholder="О себе" minlength="2" maxlength="200" required>
-          <p class="popup__error" id="profile-job-error"></p>
+          <input type="text" class="popup__input" name="about" id="profile-about" placeholder="О себе" minlength="2" maxlength="200" required>
+          <p class="popup__error" id="profile-about-error"></p>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>
