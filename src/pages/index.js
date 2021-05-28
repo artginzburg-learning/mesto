@@ -65,7 +65,7 @@ avatarEditor.setEventListeners();
 const avatarEditorValidator = new FormValidator(defaultFormConfig, avatarEditor.form);
 avatarEditorValidator.enableValidation();
 
-const avatarEditorOpenButton = document.querySelector(profileSelectors.avatarSelector);
+const avatarEditorOpenButton = document.querySelector(profileSelectors.avatarSelector).parentElement;
 avatarEditorOpenButton.addEventListener('click', () => avatarEditor.open());
 
 //  FEAT: Image preview
