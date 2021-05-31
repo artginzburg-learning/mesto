@@ -77,7 +77,7 @@ imageViewer.setEventListeners();
 
 const deleteConfirmation = new PopupWithForm('#delete-confirmation', () => {
   const card = deleteConfirmation.currentCard;
-  return api.deleteCard(card.cardData._id)
+  return api.deleteCard(card.data._id)
     .then(card.remove);
 });
 deleteConfirmation.setEventListeners();
@@ -122,13 +122,12 @@ Promise.all([
             deleteConfirmation.open();
           },
           () => {
-            (data.liked
+            (cardInstance.liked
               ? api.unLikeCard
               : api.likeCard)(data._id)
                 .then(result => {
-                  cardInstance.toggleLike();
+                  cardInstance.liked = !cardInstance.liked;
                   cardInstance.updateLikes(result.likes.length);
-                  data.liked = !data.liked;
                 })
                 .catch(console.error);
           }

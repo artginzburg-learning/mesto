@@ -1,9 +1,6 @@
 export default class Card {
-  constructor(cardData, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
-    this._name = cardData.name;
-    this._link = cardData.link;
-    this._removable = cardData.removable;
-    this.cardData = cardData;
+  constructor(data, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
+    this.data = data;
 
     this._templateSelector = templateSelector;
 
@@ -12,10 +9,17 @@ export default class Card {
     this._handleLikeClick = handleLikeClick;
 
     this.created = this._create();
+
+    this.data.liked && (this.liked = 1);
   }
 
-  get _template() {
-    return document.querySelector(this._templateSelector).content.firstElementChild;
+  set liked(value) {
+    this._likeButton.classList[(value ? 'add' : 'remove')]('element__like-button_active');
+    this.data.liked = value;
+  }
+
+  get liked() {
+    return this.data.liked;
   }
 
   toggleLike = () =>
@@ -28,20 +32,24 @@ export default class Card {
     this._likeCounter.textContent = quantity;
   }
 
+  get _template() {
+    return document.querySelector(this._templateSelector).content.firstElementChild;
+  }
+
   _setListeners() {
     this._imgElement.addEventListener('click', this._handleCardClick);
-    this._removable
+    this.data.removable
       && this._trashButton.addEventListener('click', this._handleDeleteClick);
     this._likeButton.addEventListener('click', this._handleLikeClick);
   }
 
   _buildImage(element) {
-    element.src = this._link;
-    element.alt = this._name;
+    element.src = this.data.link;
+    element.alt = this.data.name;
   }
 
   _buildTitle(element) {
-    element.textContent = this._name;
+    element.textContent = this.data.name;
   }
 
   _create() {
@@ -56,7 +64,7 @@ export default class Card {
 
     this._trashButton = this._card.querySelector(trashButtonSelector);
 
-    this._removable
+    this.data.removable
       && this._trashButton.classList.add(trashButtonVisibleClass);
 
     this._titleElement = this._card.querySelector('.element__title');
@@ -64,12 +72,9 @@ export default class Card {
 
     this._likeButton = this._card.querySelector('.element__like-button');
 
-    if (this.cardData.liked) {
-      this.toggleLike();
-    }
-
     this._likeCounter = this._card.querySelector('.element__like-counter');
-    this.updateLikes(this.cardData.likes.length);
+
+    this.updateLikes(this.data.likes.length);
 
     this._setListeners();
 

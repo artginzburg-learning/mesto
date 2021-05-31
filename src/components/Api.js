@@ -68,7 +68,7 @@ class Api {
     this._customFetch(`cards/likes/${cardId}`, 'DELETE');
 
   updateAvatar = ({ avatar }) =>
-    this._customFetch(`users/me/avatar`, 'PATCH', {
+    this._customFetch('users/me/avatar', 'PATCH', {
       avatar
     });
 }
