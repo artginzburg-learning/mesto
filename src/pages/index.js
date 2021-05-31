@@ -1,32 +1,32 @@
 import './index.css';
 
-import Card from '../components/Card.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import FormValidator from '../components/FormValidator.js';
-import Section from '../components/Section.js';
-import UserInfo from '../components/UserInfo.js';
+import Card from '../components/Card';
+import PopupWithForm from '../components/PopupWithForm';
+import PopupWithImage from '../components/PopupWithImage';
+import FormValidator from '../components/FormValidator';
+import Section from '../components/Section';
+import UserInfo from '../components/UserInfo';
 
-import api from '../components/Api.js';
+import api from '../components/Api';
 
-import { defaultFormConfig } from '../utils/constants.js';
+import { defaultFormConfig } from '../utils/constants';
 
 // FEAT: Profile editing
 
 const profileSelectors = {
   nameSelector: '.profile__name',
-  jobSelector: '.profile__description',
+  aboutSelector: '.profile__description',
   avatarSelector: '.profile__avatar'
 };
 
 const profileUserInfo = new UserInfo(profileSelectors);
 
 const profileEditor = new PopupWithForm('#profile-editor', data =>
-  api.editProfile(data.name, data.job)
-    .then(result =>
+  api.editProfile(data)
+    .then(({ name, about }) =>
       profileUserInfo.setUserInfo({
-        name: result.name,
-        job: result.about
+        name,
+        about
       })
     )
 );
@@ -37,7 +37,7 @@ profileEditorValidator.enableValidation();
 
 const {
   name: nameInput,
-  job: jobInput
+  about: aboutInput
 } = profileEditor.form.elements;
 
 const profileEditorOpenButton = document.querySelector('.profile__edit-button');
@@ -45,7 +45,7 @@ profileEditorOpenButton.addEventListener('click', () => {
   const currentUserData = profileUserInfo.getUserInfo();
 
   nameInput.value = currentUserData.name;
-  jobInput.value = currentUserData.job;
+  aboutInput.value = currentUserData.about;
 
   profileEditor.open();
 });
@@ -53,10 +53,10 @@ profileEditorOpenButton.addEventListener('click', () => {
 // FEAT: Avatar updating
 
 const avatarEditor = new PopupWithForm('#avatar-editor', data =>
-  api.updateAvatar(data.link)
-    .then(result =>
+  api.updateAvatar(data)
+    .then(({ avatar }) =>
       profileUserInfo.setUserInfo({
-        avatar: result.avatar
+        avatar
       })
     )
 );
@@ -65,7 +65,7 @@ avatarEditor.setEventListeners();
 const avatarEditorValidator = new FormValidator(defaultFormConfig, avatarEditor.form);
 avatarEditorValidator.enableValidation();
 
-const avatarEditorOpenButton = document.querySelector(profileSelectors.avatarSelector);
+const avatarEditorOpenButton = document.querySelector(profileSelectors.avatarSelector).parentElement;
 avatarEditorOpenButton.addEventListener('click', () => avatarEditor.open());
 
 //  FEAT: Image preview
@@ -77,7 +77,7 @@ imageViewer.setEventListeners();
 
 const deleteConfirmation = new PopupWithForm('#delete-confirmation', () => {
   const card = deleteConfirmation.currentCard;
-  return api.deleteCard(card.cardData._id)
+  return api.deleteCard(card.data._id)
     .then(card.remove);
 });
 deleteConfirmation.setEventListeners();
@@ -91,10 +91,15 @@ Promise.all([
   api.getInitialCards(),
 ])
   .then(([userData, initialCards]) => {
+    const {
+      name,
+      about,
+      avatar
+    } = userData;
     profileUserInfo.setUserInfo({
-      name: userData.name,
-      job: userData.about,
-      avatar: userData.avatar
+      name,
+      about,
+      avatar
     });
 
     cardsList = new Section({
@@ -103,7 +108,9 @@ Promise.all([
         if (data.owner._id === userData._id) {
           data.removable = 1;
         }
-        if (data.likes.filter(user => user._id === userData._id).length) {
+        if (data.likes.filter(user =>
+          user._id === userData._id
+        ).length) {
           data.liked = 1;
         }
         const cardInstance = new Card(
@@ -115,13 +122,12 @@ Promise.all([
             deleteConfirmation.open();
           },
           () => {
-            (data.liked
-              ? api.unLikeCard(data._id)
-              : api.likeCard(data._id))
+            (cardInstance.liked
+              ? api.unLikeCard
+              : api.likeCard)(data._id)
                 .then(result => {
-                  cardInstance.toggleLike();
+                  cardInstance.liked = !cardInstance.liked;
                   cardInstance.updateLikes(result.likes.length);
-                  data.liked = !data.liked;
                 })
                 .catch(console.error);
           }

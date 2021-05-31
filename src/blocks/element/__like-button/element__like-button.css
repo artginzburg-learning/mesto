@@ -14,7 +14,7 @@
 
   cursor: pointer;
 
-  transition-property: opacity;
+  transition-property: opacity background-image;
   transition-duration: .2s;
 }
 
