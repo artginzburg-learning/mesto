@@ -10,7 +10,9 @@ export default class Card {
 
     this.created = this._create();
 
-    this.data.liked && (this.liked = 1);
+    if (this.data.liked) {
+      this.liked = 1;
+    }
   }
 
   set liked(value) {
@@ -22,8 +24,8 @@ export default class Card {
     return this.data.liked;
   }
 
-  toggleLike = () =>
-    this._likeButton.classList.toggle('element__like-button_active');
+  // toggleLike = () =>
+  //   this._likeButton.classList.toggle('element__like-button_active');
 
   remove = () =>
     this._card.remove();

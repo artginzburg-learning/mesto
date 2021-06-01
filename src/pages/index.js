@@ -9,25 +9,24 @@ import UserInfo from '../components/UserInfo';
 
 import api from '../components/Api';
 
-import { defaultFormConfig } from '../utils/constants';
+import {
+  defaultFormConfig,
+  profileSelectors,
+  cardSelectors,
+  popupSelectors
+} from '../utils/constants';
 
 // FEAT: Profile editing
 
-const profileSelectors = {
-  nameSelector: '.profile__name',
-  aboutSelector: '.profile__description',
-  avatarSelector: '.profile__avatar'
-};
-
 const profileUserInfo = new UserInfo(profileSelectors);
 
-const profileEditor = new PopupWithForm('#profile-editor', data =>
+const profileEditor = new PopupWithForm(profileSelectors.editorSelector, data =>
   api.editProfile(data)
     .then(({ name, about }) =>
-      profileUserInfo.setUserInfo({
+      profileUserInfo.userInfo = {
         name,
         about
-      })
+      }
     )
 );
 profileEditor.setEventListeners();
@@ -40,9 +39,9 @@ const {
   about: aboutInput
 } = profileEditor.form.elements;
 
-const profileEditorOpenButton = document.querySelector('.profile__edit-button');
+const profileEditorOpenButton = document.querySelector(profileSelectors.editButtonSelector);
 profileEditorOpenButton.addEventListener('click', () => {
-  const currentUserData = profileUserInfo.getUserInfo();
+  const currentUserData = profileUserInfo.userInfo;
 
   nameInput.value = currentUserData.name;
   aboutInput.value = currentUserData.about;
@@ -52,12 +51,12 @@ profileEditorOpenButton.addEventListener('click', () => {
 
 // FEAT: Avatar updating
 
-const avatarEditor = new PopupWithForm('#avatar-editor', data =>
+const avatarEditor = new PopupWithForm(popupSelectors.avatarEditor, data =>
   api.updateAvatar(data)
     .then(({ avatar }) =>
-      profileUserInfo.setUserInfo({
+      profileUserInfo.userInfo = {
         avatar
-      })
+      }
     )
 );
 avatarEditor.setEventListeners();
@@ -70,12 +69,12 @@ avatarEditorOpenButton.addEventListener('click', () => avatarEditor.open());
 
 //  FEAT: Image preview
 
-const imageViewer = new PopupWithImage('#image-viewer');
+const imageViewer = new PopupWithImage(popupSelectors.imageViewer);
 imageViewer.setEventListeners();
 
 // FEAT: Card deleting
 
-const deleteConfirmation = new PopupWithForm('#delete-confirmation', () => {
+const deleteConfirmation = new PopupWithForm(popupSelectors.deleteConfirmation, () => {
   const card = deleteConfirmation.currentCard;
   return api.deleteCard(card.data._id)
     .then(card.remove);
@@ -83,8 +82,6 @@ const deleteConfirmation = new PopupWithForm('#delete-confirmation', () => {
 deleteConfirmation.setEventListeners();
 
 // FEAT: Initial user data and cards loading
-
-let cardsList;
 
 Promise.all([
   api.getUserInfo(),
@@ -96,32 +93,36 @@ Promise.all([
       about,
       avatar
     } = userData;
-    profileUserInfo.setUserInfo({
+    profileUserInfo.userInfo = {
       name,
       about,
       avatar
-    });
+    };
 
-    cardsList = new Section({
+    const cardsList = new Section({
       items: initialCards.reverse(),
       renderer: data => {
-        if (data.owner._id === userData._id) {
-          data.removable = 1;
-        }
-        if (data.likes.filter(user =>
+        data.removable = (data.owner._id === userData._id);
+
+        data.liked = (data.likes.some(user =>
           user._id === userData._id
-        ).length) {
-          data.liked = 1;
-        }
+        ));
+
         const cardInstance = new Card(
           data,
-          '#element-template',
-          () => imageViewer.open(data),
+          cardSelectors.templateSelector,
+          () => {
+            const {
+              name,
+              link
+            } = data;
+            imageViewer.open({ name, link });
+          },
           () => {
             deleteConfirmation.currentCard = cardInstance;
             deleteConfirmation.open();
           },
-          () => {
+          () =>
             (cardInstance.liked
               ? api.unLikeCard
               : api.likeCard)(data._id)
@@ -129,28 +130,27 @@ Promise.all([
                   cardInstance.liked = !cardInstance.liked;
                   cardInstance.updateLikes(result.likes.length);
                 })
-                .catch(console.error);
-          }
+                .catch(console.error)
         );
 
         cardsList.setItem(cardInstance.created);
       }
-    }, '.elements__list');
+    }, cardSelectors.listSelector);
 
     cardsList.renderItems();
+
+    // FEAT: Card adding
+
+    const elementEditor = new PopupWithForm(popupSelectors.elementEditor, data =>
+      api.addCard(data.title, data.link)
+        .then(cardsList.renderer)
+    );
+    elementEditor.setEventListeners();
+
+    const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
+    elementEditorValidator.enableValidation();
+
+    const elementEditorOpenButton = document.querySelector(profileSelectors.addButtonSelector);
+    elementEditorOpenButton.addEventListener('click', () => elementEditor.open());
   })
   .catch(console.error);
-
-// FEAT: Card adding
-
-const elementEditor = new PopupWithForm('#element-editor', data =>
-  api.addCard(data.title, data.link)
-    .then(cardsList.renderer)
-);
-elementEditor.setEventListeners();
-
-const elementEditorValidator = new FormValidator(defaultFormConfig, elementEditor.form);
-elementEditorValidator.enableValidation();
-
-const elementEditorOpenButton = document.querySelector('.profile__add-button');
-elementEditorOpenButton.addEventListener('click', () => elementEditor.open());
