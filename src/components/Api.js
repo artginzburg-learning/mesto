@@ -5,7 +5,7 @@ const api = {
   url: 'mesto.nomoreparties.co',
   protocol: 'https://',
   version: 'v1',
-}
+};
 
 class Api {
   constructor(options) {

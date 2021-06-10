@@ -62,7 +62,7 @@ export default class Card {
 
     const trashButtonClass = 'element__trash-button';
     const trashButtonSelector = `.${trashButtonClass}`;
-    const trashButtonVisibleClass = `${trashButtonClass}_visible`
+    const trashButtonVisibleClass = `${trashButtonClass}_visible`;
 
     this._trashButton = this._card.querySelector(trashButtonSelector);
 
