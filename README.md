@@ -1,113 +1,51 @@
-# [Место](https://artginzburg.github.io/mesto/)
+<div align="center">
 
-> Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки. Ну, и пользователя кастомизировать, разумеется.
+# [React](https://reactjs.org) className from an Array
+<sup>Just type [<code>git.io/toClassNames</code>](https://git.io/toClassNames) to go here</sup>
 
-Project 4: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-4_final)</kbd>
+> This is a simplified version of [npm classnames](https://www.npmjs.com/package/classnames) for projects with a limited list of depencendies (e.g. university homework).
 
-Project 5: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-5_final)</kbd>
+<br />
 
-Project 6: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-6_final)</kbd>
+</div>
+ 
+### Example with `classNames()`
+> Use [Spread syntax (...)](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to make it succinct and simple.
 
-Project 7: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-7_final)</kbd>
-
-Project 8: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-8_final)</kbd>
-
-Project 9: <kbd>[Reviewed and accepted version of the project](https://github.com/artginzburg/mesto/tree/project-9_final)</kbd>
-
-## Описание
-
-3-я и 4-я курсовые работы в рамках обучения [Веб-разработке](https://praktikum.yandex.ru/web/) в [Яндекс.Практикуме](https://praktikum.yandex.ru/)
-
-### Среда исполнения
-
-> [NodeJS](https://nodejs.org) — программная платформа с открытым исходным кодом, основанная на движке V8, превращающая JavaScript из узкоспециализированного языка в язык общего назначения. 
-
-## Установка
-
-```bash
-# Склонировать репозиторий
-git clone https://github.com/artginzburg/mesto
-# Перейти в папку проекта
-cd mesto
-# Установить зависимости
-npm i
+```js
+import { classNames } from '../functions/toClassNames';
 ```
 
-## Запуск
-
-**Демонстрация в режиме разработки**
-```bash
-npm run dev
+```jsx
+// logo.jsx
+<a {...classNames(['logo', '', isInHeader && 'header__logo'])} onClick={showUnicorns}>
 ```
-> Запускает локальный сервер на [localhost:6969](http://localhost:6969) · С автоматическим обновлением при внесении изменений
+<div align="center">
 
-**Сборка проекта для независимой эксплуатации**
-```bash
-npm run build
+<sup>outputs **className="logo header__logo"**</sup>
+
+</div>
+
+<br />
+<br />
+
+_If you're not satisfied with using spread syntax in such context, your perfect option would be the following:_
+
+### Example with `toClassNames()`
+> Pass anything to the array that generates into a string, without worries about `' '`, `undefined`, `false` [etc.](https://developer.mozilla.org/en-US/docs/Glossary/Falsy "Falsey values in JS") being output:
+
+```js
+import { toClassNames } from '../functions/toClassNames';
 ```
-> Компилирует код в директорию `/dist`
 
-**Размещение на GitHub Pages**
-```bash
-npm run deploy
+```jsx
+// link.jsx
+
+const linkClasses = [
+  linkStyle,
+  (props.selectedIndex === index) && 'is-selected',
+];
+
+<a className={ toClassNames(linkClasses) } href={pkg.repo}>...</a>
 ```
-> Размещает продакшн-версию кода из директории `/dist` в ветке `gh-pages`
-
-<br>
-
-## Технологии
-
-- JSON API
-- BEM Methodology
-- Webpack
-- File Structure — Nested BEM
-- Adaptive design
-- CSS transformations and transitions
-- Flexbox & Grid Layout
-- JavaScript (Classes, Modules)
-- Live form validation
-- Keyboard, input and mouse events
-- [Image optimization](https://tinypng.com/)
-- Version Control: Git
-
-## Ссылки
-
-- [Макет 4](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4)
-
-  [Макет 5](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5)
-
-  [Макет 6](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6)
-
-  [Макет 9](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript-9-sprint)
-
-<details>
-  <summary>Чеклисты</summary>
-
-  - [Чеклист 4](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html)
-
-    [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html)
-
-    [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html)
-    
-    [Чеклист 7](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html)
-
-    [Чеклист 8](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-8/index.html)
-
-    [Чеклист 9](https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-9/index.html)
-
-</details>
-
-## Планы по доработке
-
-- [ ] Разобраться с грамотным делегированием событий
-
-<br>
-<br>
-
-<p align="center">
-  <a href="https://github.com/artginzburg/russian-travel"><-- Prev.</a>
-  &nbsp;
-  <code><a href="https://github.com/artginzburg/yandex.praktikum-portfolio">Portfolio</a></code>
-  &nbsp;
-  <a href="https://github.com/artginzburg/mesto-react">Next --></a>
-</p>
+<sup>now it doesn't matter how <code>linkStyle</code> was even defined in the first place
